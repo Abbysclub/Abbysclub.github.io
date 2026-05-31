@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Musikpedia - Alben &amp; Tracklisten</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #141414; margin: 20px; color: white; padding-bottom: 80px; }
+    .container { max-width: 1000px; margin: auto; background: #1f1f1f; padding: 30px; border-radius: 10px; border: 1px solid #00ced1; box-shadow: 0 4px 15px rgba(0, 206, 209, 0.2); }
+    .back-link { display: inline-block; margin-bottom: 25px; color: #00ced1; text-decoration: none; font-weight: bold; }
+    .back-link:hover { text-decoration: underline; }
+    
+    h1 { border-bottom: 2px solid #00ced1; padding-bottom: 10px; text-transform: uppercase; margin-top: 10px; font-size: 28px; }
+    
+    /* Film-Eintrag Layout */
+    .wiki-entry { display: flex; gap: 30px; background: #262626; padding: 20px; border-radius: 8px; border: 1px solid #333; margin-top: 20px; align-items: flex-start; }
+    .wiki-text { flex: 1; }
+    .wiki-text h2 { margin-top: 0; color: #00ced1; font-size: 24px; text-transform: uppercase; }
+    .wiki-text p { color: #ccc; line-height: 1.6; font-size: 15px; margin: 8px 0; }
+    
+    /* Das Album-Cover */
+    .wiki-image { width: 250px; height: 250px; object-fit: cover; border-radius: 6px; border: 2px solid #00ced1; box-shadow: 0 0 10px rgba(0,206,209,0.3); }
+    
+    /* Die Trackliste im Platten-Design */
+    .tracklist-box { background: #141414; border: 1px solid #333; border-radius: 6px; padding: 15px; margin-top: 15px; }
+    .track-item { display: flex; justify-content: space-between; padding: 8px 10px; border-bottom: 1px solid #222; font-size: 14px; }
+    .track-item:last-child { border-bottom: none; }
+    .track-item:hover { background: #262626; color: #00ced1; }
+    .track-number { color: #00ced1; font-weight: bold; margin-right: 10px; }
+    .uncut-badge { background: #ff0000; color: white; font-size: 10px; padding: 2px 5px; border-radius: 3px; font-weight: bold; text-transform: uppercase; }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <a class="back-link" href="musikpedia.html">← Zurück zur Musik-Übersicht</a>
+    
+    <h1>Index: Alben &amp; Soundtracks (Buchstabe A)</h1>
+
+    <!-- Ein Vorzeige-Album für die Musikpedia -->
+    <div class="wiki-entry">
+      <div class="wiki-text">
+        <h2>The Marshall Mathers LP (2000)</h2>
+        <p><strong>Künstler:</strong> Eminem (Slim Shady)</p>
+        <p><strong>Kategorie:</strong> Uncensored Rap / Album-Archiv</p>
+        <p><strong>Zensur-Status:</strong> <span style="color: #ff0000; font-weight: bold;">Explicit Lyrics / Uncensored Fassung</span></p>
+        
+        <h3 style="color: #00ced1; margin-top: 20px; font-size: 16px; text-transform: uppercase;">💿 Album-Trackliste (Sämtliche Songs)</h3>
+        
+        <div class="tracklist-box">
+          <div class="track-item">
+            <span><span class="track-number">01</span> Public Service Announcement 2000</span>
+            <span class="unsupported-msg" style="color: #666; font-size: 12px;">0:25</span>
+          </div>
+          <div class="track-item">
+            <span><span class="track-number">02</span> Kill You</span>
+            <span class="uncut-badge">Uncut</span>
+          </div>
+          <div class="track-item">
+            <span><span class="track-number">03</span> Stan (feat. Dido)</span>
+            <span class="unsupported-msg" style="color: #666; font-size: 12px;">6:44</span>
+          </div>
+          <div class="track-item">
+            <span><span class="track-number">04</span> Paul (Skit)</span>
+            <span class="unsupported-msg" style="color: #666; font-size: 12px;">0:10</span>
+          </div>
+          <div class="track-item">
+            <span><span class="track-number">05</span> Who Knew</span>
+            <span class="uncut-badge">Uncut</span>
+          </div>
+          <div class="track-item">
+            <span><span class="track-number">06</span> The Way I Am</span>
+            <span class="uncut-badge">Uncut</span>
+          </div>
+          <div class="track-item">
+            <span><span class="track-number">07</span> Real Slim Shady</span>
+            <span class="unsupported-msg" style="color: #666; font-size: 12px;">4:44</span>
+          </div>
+        </div>
+        
+      </div>
+      <!-- Platzhalter für das originale Album-Cover -->
+      <img class="wiki-image" src="The Marshall Mathers LP.jpg" alt="Album Cover">
+    </div>
+
+  </div>
+
+</body>
+</html>
