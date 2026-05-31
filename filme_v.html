@@ -10,11 +10,7 @@
     .back-btn { background: #222; color: white; border: 1px solid #444; padding: 6px 12px; border-radius: 5px; font-weight: bold; text-decoration: none; font-size: 13px; text-transform: uppercase; }
     .back-btn:hover { background: #ff0000; border-color: #ff0000; }
     header { background: #000; padding: 20px; border-radius: 10px; margin-bottom: 30px; border: 1px solid #333; width: 100%; max-width: 850px; box-sizing: border-box; }
-    header h1 { margin: 0; color: #fff; font-size: 28px; text-transform: uppercase; letter-spacing: 1px; }
-    .abc-box { background: #000; border: 1px solid #333; padding: 15px; border-radius: 8px; text-align: center; width: 100%; max-width: 850px; box-sizing: border-box; margin-bottom: 30px; }
-    .abc-grid { display: grid; grid-template-columns: repeat(14, 1fr); gap: 6px; }
-    .abc-btn { background: #222; color: #aaa; border: 1px solid #444; padding: 6px 0; border-radius: 4px; font-weight: bold; text-decoration: none; font-size: 13px; }
-    .abc-btn.active { background: #ff0000; color: white; border-color: #ff0000; }
+    header h1 { margin: 0; color: #fff; font-size: 28px; text-transform: uppercase; }
     .movie-card { background: #1f1f1f; border: 1px solid #333; border-radius: 8px; padding: 25px; margin-bottom: 25px; width: 100%; max-width: 850px; box-sizing: border-box; display: flex; gap: 30px; justify-content: space-between; }
     .movie-details { flex: 1; }
     .movie-details h2 { margin-top: 0; color: #ff0000; font-size: 24px; text-transform: uppercase; }
@@ -30,88 +26,33 @@
   </div>
   <div class="container">
     <header><h1>INDEX: BUCHSTABE V</h1></header>
-    
-    <div class="abc-box">
-      <div class="abc-grid">
-        <a class="abc-btn $( [ "V" == "A" ] && echo "active" )" href="filme_a.html">A</a>
-        <a class="abc-btn $( [ "V" == "B" ] && echo "active" )" href="filme_b.html">B</a>
-        <a class="abc-btn $( [ "V" == "C" ] && echo "active" )" href="filme_c.html">C</a>
-        <a class="abc-btn $( [ "V" == "D" ] && echo "active" )" href="filme_d.html">D</a>
-        <a class="abc-btn $( [ "V" == "E" ] && echo "active" )" href="filme_e.html">E</a>
-        <a class="abc-btn $( [ "V" == "F" ] && echo "active" )" href="filme_f.html">F</a>
-        <a class="abc-btn $( [ "V" == "G" ] && echo "active" )" href="filme_g.html">G</a>
-        <a class="abc-btn $( [ "V" == "H" ] && echo "active" )" href="filme_h.html">H</a>
-        <a class="abc-btn $( [ "V" == "I" ] && echo "active" )" href="filme_i.html">I</a>
-        <a class="abc-btn $( [ "V" == "J" ] && echo "active" )" href="filme_j.html">J</a>
-        <a class="abc-btn $( [ "V" == "K" ] && echo "active" )" href="filme_k.html">K</a>
-        <a class="abc-btn $( [ "V" == "L" ] && echo "active" )" href="filme_l.html">L</a>
-        <a class="abc-btn $( [ "V" == "M" ] && echo "active" )" href="filme_m.html">M</a>
-        <a class="abc-btn $( [ "V" == "N" ] && echo "active" )" href="filme_n.html">N</a>
-      </div>
-      <div class="abc-grid" style="margin-top: 8px;">
-        <a class="abc-btn $( [ "V" == "O" ] && echo "active" )" href="filme_o.html">O</a>
-        <a class="abc-btn $( [ "V" == "P" ] && echo "active" )" href="filme_p.html">P</a>
-        <a class="abc-btn $( [ "V" == "Q" ] && echo "active" )" href="filme_q.html">Q</a>
-        <a class="abc-btn $( [ "V" == "R" ] && echo "active" )" href="filme_r.html">R</a>
-        <a class="abc-btn $( [ "V" == "S" ] && echo "active" )" href="filme_s.html">S</a>
-        <a class="abc-btn $( [ "V" == "T" ] && echo "active" )" href="filme_t.html">T</a>
-        <a class="abc-btn $( [ "V" == "U" ] && echo "active" )" href="filme_u.html">U</a>
-        <a class="abc-btn $( [ "V" == "V" ] && echo "active" )" href="filme_v.html">V</a>
-        <a class="abc-btn $( [ "V" == "W" ] && echo "active" )" href="filme_w.html">W</a>
-        <a class="abc-btn $( [ "V" == "X" ] && echo "active" )" href="filme_x.html">X</a>
-        <a class="abc-btn $( [ "V" == "Y" ] && echo "active" )" href="filme_y.html">Y</a>
-        <a class="abc-btn $( [ "V" == "Z" ] && echo "active" )" href="filme_z.html">Z</a>
-      </div>
-    </div>
-
     <div id="dynamicMovies">
       <p class="no-movies" id="emptyMessage">Bisher keine unzensierten Filme unter diesem Buchstaben registriert.</p>
     </div>
   </div>
-
   <script>
     function ladeDynamischeFilme() {
       const mainContainer = document.getElementById('dynamicMovies');
       const emptyMessage = document.getElementById('emptyMessage');
       const neueFilme = JSON.parse(localStorage.getItem('wikiArtikelFilme')) || [];
-      
       let hatTreffer = false;
-      
-      // Echte Live-Sortierung für John Kramers Saw-Archiv
       if("V" === "S") {
         hatTreffer = true;
         emptyMessage.style.display = "none";
         const sawCard = document.createElement('div');
         sawCard.className = "movie-card";
-        sawCard.innerHTML = `
-          <div class="movie-details">
-            <h2>SAW X (2023)</h2>
-            <p><strong>Kategorie:</strong> Uncut-Filmarchiv</p>
-            <p><strong>Regie:</strong> Kevin Greutert</p>
-            <p><strong>Besetzung:</strong> Tobin Bell, Shawnee Smith</p>
-            <p><strong>Handlung:</strong> John Kramer reist nach Mexiko für eine experimentelle Krebstherapie – und nimmt brutale Rache an den Betrügern.</p>
-          </div>
-          <img class="movie-poster" src="SAW X.jpg" alt="Saw X">
-        `;
+        sawCard.innerHTML = `<div class="movie-details"><h2>SAW X (2023)</h2><p><strong>Kategorie:</strong> Uncut-Filmarchiv</p><p><strong>Regie:</strong> Kevin Greutert</p><p><strong>Besetzung:</strong> Tobin Bell, Shawnee Smith</p><p><strong>Handlung:</strong> John Kramer reist nach Mexiko für eine experimentelle Krebstherapie – und nimmt brutale Rache an den Betrügern.</p></div><img class="movie-poster" src="Saw%20X.jpg" alt="Saw X">`;
         mainContainer.appendChild(sawCard);
       }
-
       neueFilme.forEach(film => {
         if (film.index === "V" && film.name !== "Saw" && film.name !== "SAW X") {
           hatTreffer = true;
           emptyMessage.style.display = "none";
-          
           const card = document.createElement('div');
           card.className = "movie-card";
-          card.innerHTML = `
-            <div class="movie-details">
-              <h2>${film.name.toUpperCase()}</h2>
-              <p><strong>Kategorie:</strong> Uncut-Filmarchiv</p>
-              <p><strong>Status:</strong> Live-Server-Sync aktiv</p>
-              <p><strong>Zusatz-Info:</strong> Film erfolgreich im V-Register angedockt.</p>
-            </div>
-            <img class="movie-poster" src="${film.name}.jpg" onerror="this.src='Supergirl.jpg';">
-          `;
+          let bildSrc = film.poster ? film.poster : "https://unsplash.com";
+          let handlungText = film.plot ? film.plot : "Film erfolgreich registriert. Unzensierte Live-Inhalte aktiv.";
+          card.innerHTML = `<div class="movie-details"><h2>${film.name.toUpperCase()} (${film.year || 'N/A'})</h2><p><strong>Kategorie:</strong> Uncut-Filmarchiv</p><p><strong>Regie:</strong> ${film.director || 'Unbekannt'}</p><p><strong>Besetzung:</strong> ${film.cast || 'Keine Angabe'}</p><p><strong>Handlung &amp; Details:</strong> ${handlungText}</p></div><img class="movie-poster" src="${bildSrc}" alt="${film.name} Cover">`;
           mainContainer.appendChild(card);
         }
       });
