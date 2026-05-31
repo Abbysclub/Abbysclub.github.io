@@ -1,0 +1,107 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Filmpedia - Darsteller Wiki</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #141414; margin: 0; color: white; padding-bottom: 80px; }
+    .container { max-width: 1000px; margin: auto; padding: 20px; display: flex; flex-direction: column; align-items: center; }
+    
+    .navbar { background: #000; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #007bff; width: 100%; box-sizing: border-box; }
+    .navbar .logo { font-size: 24px; color: #007bff; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
+    .back-btn { background: #222; color: white; border: 1px solid #444; padding: 6px 12px; border-radius: 5px; font-weight: bold; text-decoration: none; font-size: 13px; text-transform: uppercase; }
+    .back-btn:hover { background: #007bff; border-color: #007bff; }
+
+    header { background: linear-gradient(180deg, #000, #1f1f1f); padding: 25px 20px; text-align: center; border-radius: 10px; margin-bottom: 25px; border: 1px solid #333; width: 100%; max-width: 700px; box-sizing: border-box; }
+    header h1 { margin: 0; color: #fff; font-size: 32px; text-transform: uppercase; }
+    header p { color: #aaa; margin: 5px 0 0 0; font-size: 13px; }
+    
+    .create-box { width: 100%; max-width: 700px; margin-bottom: 25px; text-align: center; }
+    .create-link-btn { display: block; background: #007bff; color: white; border: 1px solid #00c6ff; padding: 12px; border-radius: 8px; font-weight: bold; text-decoration: none; font-size: 14px; text-transform: uppercase; box-shadow: 0 0 15px rgba(0,123,255,0.3); transition: 0.2s; }
+    .create-link-btn:hover { background: #0056b3; transform: scale(1.02); }
+
+    .az-bar { display: flex; justify-content: center; flex-wrap: wrap; gap: 5px; margin-bottom: 30px; background: #000; padding: 10px; border-radius: 8px; border: 1px solid #333; width: 100%; max-width: 700px; box-sizing: border-box; }
+    .az-btn { background: #262626; color: white; text-decoration: none; padding: 6px 10px; border-radius: 4px; font-weight: bold; font-size: 12px; border: 1px solid #444; transition: 0.2s; }
+    .az-btn:hover { background: #007bff; border-color: #007bff; transform: scale(1.1); }
+    
+    .list-section { background: #1f1f1f; padding: 20px; border-radius: 10px; border: 1px solid #007bff; width: 100%; max-width: 700px; box-sizing: border-box; }
+    .list-title { font-size: 22px; margin-top: 0; color: #007bff; border-bottom: 2px solid #007bff; padding-bottom: 5px; font-weight: bold; text-transform: uppercase; margin-bottom: 15px; }
+    
+    .grid-links { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .star-card { background: #262626; padding: 12px; border-radius: 6px; border: 1px solid #333; text-decoration: none; color: white; font-weight: bold; font-size: 15px; transition: 0.2s; display: flex; justify-content: space-between; align-items: center; }
+    .star-card:hover { border-color: #007bff; background: #2d2d2d; transform: translateY(-2px); }
+    
+    .letter-badge { background: #007bff; color: white; font-size: 10px; padding: 2px 6px; border-radius: 4px; text-transform: uppercase; }
+    .new-badge { background: #ff0000 !important; font-weight: bold; }
+
+    footer { background: #000; color: #666; text-align: center; padding: 15px; font-size: 12px; border-top: 1px solid #222; width: 100%; position: fixed; bottom: 0; left: 0; z-index: 100; }
+    footer strong { color: #aaa; }
+  </style>
+</head>
+<body>
+
+  <div class="navbar">
+    <div class="logo">Filmpedia 🎬</div>
+    <a href="filmpedia.html" class="back-btn">← Zurück zu den News</a>
+  </div>
+
+  <div class="container">
+    <header>
+      <h1>Darsteller Wiki</h1>
+      <p>Das unzensierte Archiv für internationale Schauspieler und Actionstars</p>
+    </header>
+
+    <div class="create-box">
+      <a href="artikel_darsteller.html" class="create-link-btn">+ Neuen Darsteller-Artikel anlegen</a>
+    </div>
+
+    <div class="az-bar">
+      <a href="wiki_a_herren.html" class="az-btn">A</a> <a href="wiki_b_herren.html" class="az-btn">B</a> <a href="wiki_c_herren.html" class="az-btn">C</a> <a href="wiki_d_herren.html" class="az-btn">D</a> <a href="wiki_e_herren.html" class="az-btn">E</a> <a href="wiki_f_herren.html" class="az-btn">F</a> <a href="wiki_g_herren.html" class="az-btn">G</a> <a href="wiki_h_herren.html" class="az-btn">H</a> <a href="wiki_i_herren.html" class="az-btn">I</a> <a href="wiki_j_herren.html" class="az-btn">J</a> <a href="wiki_k_herren.html" class="az-btn">K</a> <a href="wiki_l_herren.html" class="az-btn">L</a> <a href="wiki_m_herren.html" class="az-btn">M</a> <a href="wiki_n_herren.html" class="az-btn">N</a> <a href="wiki_o_herren.html" class="az-btn">O</a> <a href="wiki_p_herren.html" class="az-btn">P</a> <a href="wiki_q_herren.html" class="az-btn">Q</a> <a href="wiki_r_herren.html" class="az-btn">R</a> <a href="wiki_s_herren.html" class="az-btn">S</a> <a href="wiki_t_herren.html" class="az-btn">T</a> <a href="wiki_u_herren.html" class="az-btn">U</a> <a href="wiki_v_herren.html" class="az-btn">V</a> <a href="wiki_w_herren.html" class="az-btn">W</a> <a href="wiki_x_herren.html" class="az-btn">X</a> <a href="wiki_y_herren.html" class="az-btn">Y</a> <a href="wiki_z.html" class="az-btn">Z</a>
+    </div>
+
+    <div class="list-section">
+      <div class="list-title">📋 Registrierte Biografien</div>
+      <div class="grid-links" id="starListContainer"></div>
+    </div>
+
+  </div>
+
+  <footer>
+    <p>© 2026 Filmpedia Wiki | Gegründet am: <strong>29. Mai 2026</strong> | Gründer: <strong>(Abby) Daniel.H</strong></p>
+  </footer>
+
+  <script>
+    // SWAYZE IST JETZT DIE NUMMER 1 HIER IN DEN BASIS-DATEN!
+    let basisDaten = [
+      { name: "Swayze, Patrick", index: "S", link: "wiki_s_herren.html" },
+      { name: "Bell, Tobin", index: "B", link: "wiki_b_herren.html" },
+      { name: "Pascal, Pedro", index: "P", link: "wiki_p_herren.html" }
+    ];
+
+    let gespeicherteArtikel = JSON.parse(localStorage.getItem('wikiArtikelHerren')) || [];
+    let kompletteListe = [...gespeicherteArtikel, ...basisDaten];
+
+    const container = document.getElementById('starListContainer');
+
+    kompletteListe.forEach((star, index) => {
+      const card = document.createElement('a');
+      card.href = star.link;
+      card.className = 'star-card';
+      
+      if (index === 0) {
+        card.innerHTML = `
+          <span>${star.name}</span>
+          <span class="letter-badge new-badge">Neu</span>
+        `;
+      } else {
+        card.innerHTML = `
+          <span>${star.name}</span>
+          <span class="letter-badge">Index ${star.index}</span>
+        `;
+      }
+      container.appendChild(card);
+    });
+  </script>
+
+</body>
+</html>

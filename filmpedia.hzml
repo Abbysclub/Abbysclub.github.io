@@ -1,0 +1,168 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Filmpedia Wiki - News Dashboard</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #141414; margin: 0; color: white; padding-bottom: 80px; }
+    
+    .container { max-width: 1000px; margin: auto; padding: 10px; display: flex; flex-direction: column; align-items: center; }
+    
+    .navbar { background: #000; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #ff0000; width: 100%; box-sizing: border-box; }
+    .navbar .logo { font-size: 24px; color: #ff0000; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
+    
+    .nav-controls { display: flex; flex-direction: column; align-items: flex-end; gap: 10px; }
+    .lang-switch { background: #222; color: white; border: 1px solid #444; padding: 5px 10px; border-radius: 5px; cursor: pointer; font-size: 14px; width: 150px; text-align: center; }
+    .gaming-btn { background: #1f8b4c; color: white; border: 1px solid #2ecc71; padding: 6px 12px; border-radius: 5px; font-weight: bold; text-decoration: none; font-size: 13px; text-transform: uppercase; text-align: center; width: 124px; transition: 0.2s; }
+
+    header { background: linear-gradient(180deg, #000, #1f1f1f); padding: 20px; text-align: center; border-radius: 10px; margin-bottom: 25px; border: 1px solid #333; width: 100%; max-width: 700px; box-sizing: border-box; }
+    header h1 { margin: 0; color: #fff; font-size: 32px; text-transform: uppercase; }
+    header p { color: #aaa; margin: 5px 0 0 0; font-size: 13px; }
+    
+    .genre-bar { 
+      display: flex; 
+      justify-content: center; 
+      gap: 10px;                  
+      margin-top: 5px;            
+      margin-bottom: 25px;        
+      width: 100%; 
+      max-width: 700px; 
+    }
+    
+    /* HIER SIND DIE BUTTONS EXTREM ENGER UND EXTRA FLACH */
+    .genre-item-btn { 
+      background: #262626; 
+      color: white; 
+      border: 1px solid #ff0000; 
+      padding: 6px 0;             /* Minimales Polster oben und unten für flachen Look */
+      border-radius: 6px; 
+      font-weight: bold; 
+      text-decoration: none; 
+      font-size: 11px;            
+      text-transform: uppercase; 
+      text-align: center; 
+      flex: 1;                    
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: 0.2s; 
+    }
+    .genre-item-btn:hover { 
+      background: #ff0000; 
+      transform: scale(1.05); 
+    }
+
+    .news-section { background: #1f1f1f; padding: 12px; border-radius: 10px; border: 1px solid #ff0000; width: 100%; max-width: 700px; box-sizing: border-box; margin-bottom: 25px; }
+    .news-title { font-size: 22px; margin-top: 0; color: #ff0000; border-bottom: 2px solid #ff0000; padding-bottom: 5px; font-weight: bold; text-transform: uppercase; }
+    
+    .news-grid { display: grid; grid-template-columns: 1fr; gap: 15px; margin-top: 10px; }
+    
+    .news-link { text-decoration: none; color: inherit; display: block; }
+    .news-card { background: #262626; padding: 15px; border-radius: 8px; border: 1px solid #333; transition: 0.2s; box-sizing: border-box; }
+    .news-card:hover { border-color: #ff0000; transform: translateY(-2px); background: #2d2d2d; }
+    .news-date { color: #ff0000; font-size: 11px; font-weight: bold; text-transform: uppercase; margin-bottom: 5px; }
+    .news-card h3 { margin: 5px 0 8px 0; font-size: 18px; color: #fff; }
+    .news-card p { margin: 0; color: #ccc; font-size: 13px; line-height: 1.4; }
+    
+    footer { background: #000; color: #666; text-align: center; padding: 15px; font-size: 12px; border-top: 1px solid #222; width: 100%; position: fixed; bottom: 0; left: 0; z-index: 100; }
+    footer strong { color: #aaa; }
+  </style>
+</head>
+<body>
+
+  <div class="navbar">
+    <div class="logo">Filmpedia 🎬</div>
+    <div class="nav-controls">
+      <select class="lang-switch" id="langSelect" onchange="wechsleSprache()">
+        <option value="de">Deutsch 🇩🇪</option>
+        <option value="en">English 🇬🇧</option>
+        <option value="da">Dansk 🇩🇰</option>
+      </select>
+      <a href="gamingpedia.html" class="gaming-btn" id="gamingBtn">🎮 Gamingpedia</a>
+    </div>
+  </div>
+
+  <div class="container">
+    <header>
+      <h1 id="mainTitle">Filmpedia Wiki</h1>
+      <p id="mainSub">Unzensiert & Uncut – Dein Film- und Serien-Newsmagazin</p>
+    </header>
+
+    <div class="genre-bar">
+      <a href="#" class="genre-item-btn">Action</a>
+      <a href="#" class="genre-item-btn">Thriller</a>
+      <a href="#" class="genre-item-btn">Abenteuer</a>
+      <a href="#" class="genre-item-btn">Drama</a>
+      <a href="#" class="genre-item-btn">Horror</a>
+      <a href="#" class="genre-item-btn">Sci-Fi</a>
+      <a href="#" class="genre-item-btn">Komödie</a>
+    </div>
+
+    <!-- 1. BEREICH: NEWS VON DARSTELLER/INNEN -->
+    <div class="news-section">
+      <div class="news-title" id="titleActors">👤 News von Darsteller/innen</div>
+      <div class="news-grid">
+        <a href="news_pascal.html" class="news-link">
+          <div class="news-card">
+            <div class="news-date">29. Mai 2026</div>
+            <h3>Pedro Pascal am Set von „The Last of Us“ Staffel 2: Düsterer & Härter</h3>
+            <p>Der Star aus 'The Mandalorian' steht als Joel wieder vor der Kamera. Die neuen Folgen versprechen knallharte und unzensierte Postapokalypse...</p>
+          </div>
+        </a>
+        <a href="news_reeves.html" class="news-link">
+          <div class="news-card">
+            <div class="news-date">28. Mai 2026</div>
+            <h3>Keanu Reeves spricht über extremes Stunt-Training für „John Wick 5“</h3>
+            <p>In einem neuen Interview verriet der Kult-Schauspieler, wie hart das Training für seine kommenden Kampfszenen ist...</p>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- 2. BEREICH: VON NEUEN PROJEKTEN -->
+    <div class="news-section">
+      <div class="news-title" id="titleProjects">🎬 Von neuen Projekten</div>
+      <div class="news-grid">
+        <a href="news_horror.html" class="news-link">
+          <div class="news-card">
+            <div class="news-date">29. Mai 2026</div>
+            <h3>„Terrifier 3“ bricht alle Tabus: Der härteste Art the Clown aller Zeiten</h3>
+            <p>Ein bekanntes Independent-Studio hat einen extremen, ungeschnittenen Horrorfilm angekündigt. Fans können sich freuen...</p>
+          </div>
+        </a>
+        <a href="news_scifi.html" class="news-link">
+          <div class="news-card">
+            <div class="news-date">27. Mai 2026</div>
+            <h3>Offiziell bestätigt: Denis Villeneuve schreibt am Drehbuch zu „Dune 3“</h3>
+            <p>Ein großes Hollywood-Studio hat grünes Licht für den Nachfolger eines beliebten Cyberpunk-Klassikers gegeben...</p>
+          </div>
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <p>© 2026 Filmpedia Wiki | <span id="footCreated">Gegründet am:</span> <strong>29. Mai 2026</strong> | <span id="footOwner">Gründer:</span> <strong>(Abby) Daniel.H</strong></p>
+  </footer>
+
+  <script>
+    const texte = {
+      de: { sub: "Unzensiert & Uncut – Dein Film- und Serien-Newsmagazin", actors: "👤 News von Darsteller/innen", projects: "🎬 Von neuen Projekten", created: "Gegründet am:", owner: "Gründer: (Abby) Daniel.H", gameBtn: "🎮 Gamingpedia" },
+      en: { sub: "Uncensored & Uncut – Your Movie & Cast News Magazine", actors: "👤 Cast & Actor Updates", projects: "🎬 Upcoming Projects", created: "Founded on:", owner: "Founder: (Abby) Daniel.H", gameBtn: "🎮 Gamingpedia" },
+      da: { sub: "Ucensuret & Uncut – Din film- og skuespilleravis", actors: "👤 Nyheder om Skuespillere", projects: "🎬 Om Nye Projekter", created: "Grundlagt den:", owner: "Grundlægger: (Abby) Daniel.H", gameBtn: "🎮 Gamingpedia" }
+    };
+
+    function wechsleSprache() {
+      const sprache = document.getElementById('langSelect').value;
+      document.getElementById('mainSub').innerText = texte[sprache].sub;
+      document.getElementById('titleActors').innerText = texte[sprache].actors;
+      document.getElementById('titleProjects').innerText = texte[sprache].projects;
+      document.getElementById('footCreated').innerText = texte[sprache].created;
+      document.getElementById('footOwner').innerText = texte[sprache].owner;
+      document.getElementById('gamingBtn').innerText = texte[sprache].gameBtn;
+    }
+  </script>
+
+</body>
+</html>
