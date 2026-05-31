@@ -2,82 +2,121 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Filmpedia Wiki - Buchstabe J (Filme)</title>
+  <title>Filmpedia Wiki - Index J</title>
   <style>
-    body { font-family: Arial, sans-serif; background: #141414; margin: 20px; color: white; padding-bottom: 80px; }
-    .container { max-width: 1000px; margin: auto; background: #1f1f1f; padding: 30px; border-radius: 10px; border: 1px solid #ff0000; box-shadow: 0 4px 15px rgba(255, 0, 0, 0.2); }
-    .back-link { display: inline-block; margin-bottom: 25px; color: #ff0000; text-decoration: none; font-weight: bold; }
-    .back-link:hover { text-decoration: underline; }
-    
-    h1 { border-bottom: 2px solid #ff0000; padding-bottom: 10px; text-transform: uppercase; margin-top: 10px; font-size: 28px; }
-    
-    /* FILMPEDIA FILME NAVI-BAR */
-    .az-bar { display: flex; justify-content: center; flex-wrap: wrap; gap: 5px; margin-bottom: 30px; background: #000; padding: 10px; border-radius: 8px; border: 1px solid #333; }
-    .az-btn { background: #262626; color: white; text-decoration: none; padding: 6px 10px; border-radius: 4px; font-weight: bold; font-size: 12px; border: 1px solid #444; transition: 0.2s; }
-    .az-btn:hover { background: #ff0000; border-color: #ff0000; transform: scale(1.1); }
-    
-    /* Das J leuchtet rot als aktiver Buchstabe */
-    .active-letter { background: #ff0000 !important; border-color: #ff0000 !important; color: white !important; }
-    
-    /* Film-Eintrag Layout */
-    .wiki-entry { display: flex; gap: 30px; background: #262626; padding: 20px; border-radius: 8px; border: 1px solid #333; margin-top: 25px; align-items: flex-start; }
-    .wiki-text { flex: 1; }
-    .wiki-text h2 { margin-top: 0; color: #ff0000; font-size: 24px; text-transform: uppercase; }
-    .wiki-text p { color: #ccc; line-height: 1.6; font-size: 15px; margin: 8px 0; }
-    .wiki-image { width: 220px; height: 310px; object-fit: cover; border-radius: 6px; border: 2px solid #ff0000; box-shadow: 0 0 10px rgba(255,0,0,0.3); }
+    body { font-family: Arial, sans-serif; background: #141414; margin: 0; color: white; padding-bottom: 80px; }
+    .container { max-width: 1000px; margin: auto; padding: 20px; display: flex; flex-direction: column; align-items: center; }
+    .navbar { background: #000; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #ff0000; width: 100%; box-sizing: border-box; }
+    .back-btn { background: #222; color: white; border: 1px solid #444; padding: 6px 12px; border-radius: 5px; font-weight: bold; text-decoration: none; font-size: 13px; text-transform: uppercase; }
+    .back-btn:hover { background: #ff0000; border-color: #ff0000; }
+    header { background: #000; padding: 20px; border-radius: 10px; margin-bottom: 30px; border: 1px solid #333; width: 100%; max-width: 850px; box-sizing: border-box; }
+    header h1 { margin: 0; color: #fff; font-size: 28px; text-transform: uppercase; letter-spacing: 1px; }
+    .abc-box { background: #000; border: 1px solid #333; padding: 15px; border-radius: 8px; text-align: center; width: 100%; max-width: 850px; box-sizing: border-box; margin-bottom: 30px; }
+    .abc-grid { display: grid; grid-template-columns: repeat(14, 1fr); gap: 6px; }
+    .abc-btn { background: #222; color: #aaa; border: 1px solid #444; padding: 6px 0; border-radius: 4px; font-weight: bold; text-decoration: none; font-size: 13px; }
+    .abc-btn.active { background: #ff0000; color: white; border-color: #ff0000; }
+    .movie-card { background: #1f1f1f; border: 1px solid #333; border-radius: 8px; padding: 25px; margin-bottom: 25px; width: 100%; max-width: 850px; box-sizing: border-box; display: flex; gap: 30px; justify-content: space-between; }
+    .movie-details { flex: 1; }
+    .movie-details h2 { margin-top: 0; color: #ff0000; font-size: 24px; text-transform: uppercase; }
+    .movie-details p { line-height: 1.6; color: #ccc; font-size: 15px; margin: 8px 0; }
+    .movie-poster { width: 200px; height: 285px; object-fit: cover; border-radius: 6px; border: 2px solid #ff0000; background: #262626; }
+    .no-movies { color: #666; font-style: italic; margin-top: 40px; font-size: 16px; }
+    #dynamicMovies { width: 100%; display: flex; flex-direction: column; align-items: center; }
   </style>
 </head>
 <body>
-
+  <div class="navbar">
+    <a href="wiki_filme.html" class="back-btn">← Zurück zur Filme-Zentrale</a>
+  </div>
   <div class="container">
-    <a class="back-link" href="wiki_filme.html">← Zurück zur Filme-Zentrale</a>
+    <header><h1>INDEX: BUCHSTABE J</h1></header>
     
-    <div class="az-bar">
-      <a href="filme_a.html" class="az-btn">A</a>
-      <a href="filme_b.html" class="az-btn">B</a>
-      <a href="filme_c.html" class="az-btn">C</a>
-      <a href="filme_d.html" class="az-btn">D</a>
-      <a href="filme_e.html" class="az-btn">E</a>
-      <a href="filme_f.html" class="az-btn">F</a>
-      <a href="filme_g.html" class="az-btn">G</a>
-      <a href="filme_h.html" class="az-btn">H</a>
-      <a href="filme_i.html" class="az-btn">I</a>
-      <a href="filme_j.html" class="az-btn active-letter">J</a>
-      <a href="filme_k.html" class="az-btn">K</a>
-      <a href="filme_l.html" class="az-btn">L</a>
-      <a href="filme_m.html" class="az-btn">M</a>
-      <a href="filme_n.html" class="az-btn">N</a>
-      <a href="filme_o.html" class="az-btn">O</a>
-      <a href="filme_p.html" class="az-btn">P</a>
-      <a href="filme_q.html" class="az-btn">Q</a>
-      <a href="filme_r.html" class="az-btn">R</a>
-      <a href="filme_s.html" class="az-btn">S</a>
-      <a href="filme_t.html" class="az-btn">T</a>
-      <a href="filme_u.html" class="az-btn">U</a>
-      <a href="filme_v.html" class="az-btn">V</a>
-      <a href="filme_w.html" class="az-btn">W</a>
-      <a href="filme_x.html" class="az-btn">X</a>
-      <a href="filme_y.html" class="az-btn">Y</a>
-      <a href="filme_z.html" class="az-btn">Z</a>
-    </div>
-    
-    <h1>Index: Buchstabe J</h1>
-
-    <!-- JIGSAW (Teil 8) -->
-    <div class="wiki-entry">
-      <div class="wiki-text">
-        <h2>Jigsaw (2017)</h2>
-        <p><strong>Kategorie:</strong> Uncut-Filmarchiv</p>
-        <p><strong>Erscheinungsjahr:</strong> Wird automatisch geladen... (Online-Sync aktiv)</p>
-        <p><strong>Regie & Crew:</strong> Michael Spierig, Peter Spierig (Regie) | Pete Goldfinger, Josh Stolberg (Drehbuch)</p>
-        <p><strong>Hauptdarsteller:</strong> Passmore, Matt | Bennett, Callum Keith | Bell, Tobin (Jigsaw)</p>
-        <p><strong>Handlung & Unzensierte Details:</strong> Inhalt wird geladen... (Automatischer Wiki-Abruf aktiv)</p>
+    <div class="abc-box">
+      <div class="abc-grid">
+        <a class="abc-btn $( [ "J" == "A" ] && echo "active" )" href="filme_a.html">A</a>
+        <a class="abc-btn $( [ "J" == "B" ] && echo "active" )" href="filme_b.html">B</a>
+        <a class="abc-btn $( [ "J" == "C" ] && echo "active" )" href="filme_c.html">C</a>
+        <a class="abc-btn $( [ "J" == "D" ] && echo "active" )" href="filme_d.html">D</a>
+        <a class="abc-btn $( [ "J" == "E" ] && echo "active" )" href="filme_e.html">E</a>
+        <a class="abc-btn $( [ "J" == "F" ] && echo "active" )" href="filme_f.html">F</a>
+        <a class="abc-btn $( [ "J" == "G" ] && echo "active" )" href="filme_g.html">G</a>
+        <a class="abc-btn $( [ "J" == "H" ] && echo "active" )" href="filme_h.html">H</a>
+        <a class="abc-btn $( [ "J" == "I" ] && echo "active" )" href="filme_i.html">I</a>
+        <a class="abc-btn $( [ "J" == "J" ] && echo "active" )" href="filme_j.html">J</a>
+        <a class="abc-btn $( [ "J" == "K" ] && echo "active" )" href="filme_k.html">K</a>
+        <a class="abc-btn $( [ "J" == "L" ] && echo "active" )" href="filme_l.html">L</a>
+        <a class="abc-btn $( [ "J" == "M" ] && echo "active" )" href="filme_m.html">M</a>
+        <a class="abc-btn $( [ "J" == "N" ] && echo "active" )" href="filme_n.html">N</a>
       </div>
-      <!-- Stelle sicher, dass das Plakat Jigsaw.jpg im Linux-Ordner liegt -->
-      <img class="wiki-image" src="Jigsaw.jpg" alt="Jigsaw Cover">
+      <div class="abc-grid" style="margin-top: 8px;">
+        <a class="abc-btn $( [ "J" == "O" ] && echo "active" )" href="filme_o.html">O</a>
+        <a class="abc-btn $( [ "J" == "P" ] && echo "active" )" href="filme_p.html">P</a>
+        <a class="abc-btn $( [ "J" == "Q" ] && echo "active" )" href="filme_q.html">Q</a>
+        <a class="abc-btn $( [ "J" == "R" ] && echo "active" )" href="filme_r.html">R</a>
+        <a class="abc-btn $( [ "J" == "S" ] && echo "active" )" href="filme_s.html">S</a>
+        <a class="abc-btn $( [ "J" == "T" ] && echo "active" )" href="filme_t.html">T</a>
+        <a class="abc-btn $( [ "J" == "U" ] && echo "active" )" href="filme_u.html">U</a>
+        <a class="abc-btn $( [ "J" == "V" ] && echo "active" )" href="filme_v.html">V</a>
+        <a class="abc-btn $( [ "J" == "W" ] && echo "active" )" href="filme_w.html">W</a>
+        <a class="abc-btn $( [ "J" == "X" ] && echo "active" )" href="filme_x.html">X</a>
+        <a class="abc-btn $( [ "J" == "Y" ] && echo "active" )" href="filme_y.html">Y</a>
+        <a class="abc-btn $( [ "J" == "Z" ] && echo "active" )" href="filme_z.html">Z</a>
+      </div>
     </div>
 
+    <div id="dynamicMovies">
+      <p class="no-movies" id="emptyMessage">Bisher keine unzensierten Filme unter diesem Buchstaben registriert.</p>
+    </div>
   </div>
 
+  <script>
+    function ladeDynamischeFilme() {
+      const mainContainer = document.getElementById('dynamicMovies');
+      const emptyMessage = document.getElementById('emptyMessage');
+      const neueFilme = JSON.parse(localStorage.getItem('wikiArtikelFilme')) || [];
+      
+      let hatTreffer = false;
+      
+      // Echte Live-Sortierung für John Kramers Saw-Archiv
+      if("J" === "S") {
+        hatTreffer = true;
+        emptyMessage.style.display = "none";
+        const sawCard = document.createElement('div');
+        sawCard.className = "movie-card";
+        sawCard.innerHTML = `
+          <div class="movie-details">
+            <h2>SAW X (2023)</h2>
+            <p><strong>Kategorie:</strong> Uncut-Filmarchiv</p>
+            <p><strong>Regie:</strong> Kevin Greutert</p>
+            <p><strong>Besetzung:</strong> Tobin Bell, Shawnee Smith</p>
+            <p><strong>Handlung:</strong> John Kramer reist nach Mexiko für eine experimentelle Krebstherapie – und nimmt brutale Rache an den Betrügern.</p>
+          </div>
+          <img class="movie-poster" src="SAW X.jpg" alt="Saw X">
+        `;
+        mainContainer.appendChild(sawCard);
+      }
+
+      neueFilme.forEach(film => {
+        if (film.index === "J" && film.name !== "Saw" && film.name !== "SAW X") {
+          hatTreffer = true;
+          emptyMessage.style.display = "none";
+          
+          const card = document.createElement('div');
+          card.className = "movie-card";
+          card.innerHTML = `
+            <div class="movie-details">
+              <h2>${film.name.toUpperCase()}</h2>
+              <p><strong>Kategorie:</strong> Uncut-Filmarchiv</p>
+              <p><strong>Status:</strong> Live-Server-Sync aktiv</p>
+              <p><strong>Zusatz-Info:</strong> Film erfolgreich im J-Register angedockt.</p>
+            </div>
+            <img class="movie-poster" src="${film.name}.jpg" onerror="this.src='Supergirl.jpg';">
+          `;
+          mainContainer.appendChild(card);
+        }
+      });
+    }
+    window.onload = ladeDynamischeFilme;
+  </script>
 </body>
 </html>
