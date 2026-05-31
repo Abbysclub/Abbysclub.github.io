@@ -1,0 +1,106 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Gamingpedia Wiki - Hauptseite</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #141414; margin: 0; color: white; padding-bottom: 80px; }
+    .container { max-width: 1000px; margin: auto; padding: 20px; display: flex; flex-direction: column; align-items: center; }
+    
+    .navbar { background: #000; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #2ecc71; width: 100%; box-sizing: border-box; }
+    .navbar .logo { font-size: 24px; color: #2ecc71; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
+    .back-btn { background: #222; color: white; border: 1px solid #444; padding: 6px 12px; border-radius: 5px; font-weight: bold; text-decoration: none; font-size: 13px; text-transform: uppercase; }
+    .back-btn:hover { background: #cc0000; border-color: #cc0000; color: white; }
+
+    header { background: linear-gradient(180deg, #000, #1f1f1f); padding: 25px 20px; text-align: center; border-radius: 10px; margin-bottom: 25px; border: 1px solid #333; width: 100%; max-width: 700px; box-sizing: border-box; }
+    header h1 { margin: 0; color: #fff; font-size: 32px; text-transform: uppercase; }
+    header p { color: #aaa; margin: 5px 0 0 0; font-size: 13px; }
+    
+    .create-box { width: 100%; max-width: 700px; margin-bottom: 25px; text-align: center; }
+    .create-link-btn { display: block; background: #2ecc71; color: #000; border: 1px solid #27ae60; padding: 12px; border-radius: 8px; font-weight: bold; text-decoration: none; font-size: 14px; text-transform: uppercase; box-shadow: 0 0 15px rgba(46,204,113,0.3); transition: 0.2s; }
+    .create-link-btn:hover { background: #27ae60; color: white; transform: scale(1.02); }
+
+    .az-bar { display: flex; justify-content: center; flex-wrap: wrap; gap: 5px; margin-bottom: 30px; background: #000; padding: 10px; border-radius: 8px; border: 1px solid #333; width: 100%; max-width: 700px; box-sizing: border-box; }
+    .az-btn { background: #262626; color: white; text-decoration: none; padding: 6px 10px; border-radius: 4px; font-weight: bold; font-size: 12px; border: 1px solid #444; transition: 0.2s; }
+    .az-btn:hover { background: #2ecc71; border-color: #2ecc71; color: #000; transform: scale(1.1); }
+    
+    .list-section { background: #1f1f1f; padding: 20px; border-radius: 10px; border: 1px solid #2ecc71; width: 100%; max-width: 700px; box-sizing: border-box; }
+    .list-title { font-size: 22px; margin-top: 0; color: #2ecc71; border-bottom: 2px solid #2ecc71; padding-bottom: 5px; font-weight: bold; text-transform: uppercase; margin-bottom: 15px; }
+    
+    .grid-links { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .star-card { background: #262626; padding: 12px; border-radius: 6px; border: 1px solid #333; text-decoration: none; color: white; font-weight: bold; font-size: 15px; transition: 0.2s; display: flex; justify-content: space-between; align-items: center; }
+    .star-card:hover { border-color: #2ecc71; background: #2d2d2d; transform: translateY(-2px); }
+    
+    .letter-badge { background: #2ecc71; color: #000; font-size: 10px; padding: 2px 6px; border-radius: 4px; text-transform: uppercase; font-weight: bold; }
+    .new-badge { background: #007bff !important; color: white !important; }
+
+    footer { background: #000; color: #666; text-align: center; padding: 15px; font-size: 12px; border-top: 1px solid #222; width: 100%; position: fixed; bottom: 0; left: 0; z-index: 100; }
+    footer strong { color: #aaa; }
+  </style>
+</head>
+<body>
+
+  <div class="navbar">
+    <div class="logo">Gamingpedia 🎮</div>
+    <a href="filmpedia.html" class="back-btn">← Zurück zu Filmpedia</a>
+  </div>
+
+  <div class="container">
+    <header>
+      <h1>Gamingpedia Wiki</h1>
+      <p>Unzensiert &amp; Uncut – Deine ultimative Spieledatenbank</p>
+    </header>
+
+    <div class="create-box">
+      <a href="artikel_spiel.html" class="create-link-btn">+ Neues Spiel im Wiki eintragen</a>
+    </div>
+
+    <!-- ALLE BUTTONS JETZT UNZERSTÖRBAR VERKNÜPFT -->
+    <div class="az-bar">
+      <a href="spiele_a.html" class="az-btn">A</a> <a href="spiele_b.html" class="az-btn">B</a> <a href="spiele_c.html" class="az-btn">C</a> <a href="spiele_d.html" class="az-btn">D</a> <a href="spiele_e.html" class="az-btn">E</a> <a href="spiele_f.html" class="az-btn">F</a> <a href="spiele_g.html" class="az-btn">G</a> <a href="spiele_h.html" class="az-btn">H</a> <a href="spiele_i.html" class="az-btn">I</a> <a href="spiele_j.html" class="az-btn">J</a> <a href="spiele_k.html" class="az-btn">K</a> <a href="spiele_l.html" class="az-btn">L</a> <a href="spiele_m.html" class="az-btn">M</a> <a href="spiele_n.html" class="az-btn">N</a> <a href="spiele_o.html" class="az-btn">O</a> <a href="spiele_p.html" class="az-btn">P</a> <a href="spiele_q.html" class="az-btn">Q</a> <a href="spiele_r.html" class="az-btn">R</a> <a href="spiele_s.html" class="az-btn">S</a> <a href="spiele_t.html" class="az-btn">T</a> <a href="spiele_u.html" class="az-btn">U</a> <a href="spiele_v.html" class="az-btn">V</a> <a href="spiele_w.html" class="az-btn">W</a> <a href="spiele_x.html" class="az-btn">X</a> <a href="spiele_y.html" class="az-btn">Y</a> <a href="spiele_z.html" class="az-btn">Z</a>
+    </div>
+
+    <div class="list-section">
+      <div class="list-title">💚 Registrierte Uncut-Games</div>
+      <div class="grid-links" id="gamesListContainer"></div>
+    </div>
+
+  </div>
+
+  <footer>
+    <p>© 2026 Filmpedia Wiki | Gegründet am: <strong>29. Mai 2026</strong> | Gründer: <strong>(Abby) Daniel.H</strong></p>
+  </footer>
+
+  <script>
+    let basisDaten = [
+      { name: "Grand Theft Auto VI", index: "G", link: "spiele_g.html" },
+      { name: "Cyberpunk 2077", index: "C", link: "spiele_c.html" }
+    ];
+
+    let gespeicherteSpiele = JSON.parse(localStorage.getItem('wikiArtikelSpiele')) || [];
+    let kompletteListe = [...gespeicherteSpiele, ...basisDaten];
+
+    const container = document.getElementById('gamesListContainer');
+
+    kompletteListe.forEach((spiel, index) => {
+      const card = document.createElement('a');
+      card.href = spiel.link;
+      card.className = 'star-card';
+      
+      if (index === 0) {
+        card.innerHTML = `
+          <span>${spiel.name}</span>
+          <span class="letter-badge new-badge">Neu</span>
+        `;
+      } else {
+        card.innerHTML = `
+          <span>${spiel.name}</span>
+          <span class="letter-badge">Index ${spiel.index}</span>
+        `;
+      }
+      container.appendChild(card);
+    });
+  </script>
+
+</body>
+</html>
