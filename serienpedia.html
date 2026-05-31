@@ -1,0 +1,106 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Serienpedia Wiki - Hauptseite</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #141414; margin: 0; color: white; padding-bottom: 80px; }
+    .container { max-width: 1000px; margin: auto; padding: 20px; display: flex; flex-direction: column; align-items: center; }
+    
+    .navbar { background: #000; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #f1c40f; width: 100%; box-sizing: border-box; }
+    .navbar .logo { font-size: 24px; color: #f1c40f; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
+    .back-btn { background: #222; color: white; border: 1px solid #444; padding: 6px 12px; border-radius: 5px; font-weight: bold; text-decoration: none; font-size: 13px; text-transform: uppercase; }
+    .back-btn:hover { background: #f1c40f; border-color: #f1c40f; color: #000; }
+
+    header { background: linear-gradient(180deg, #000, #1f1f1f); padding: 25px 20px; text-align: center; border-radius: 10px; margin-bottom: 25px; border: 1px solid #333; width: 100%; max-width: 700px; box-sizing: border-box; }
+    header h1 { margin: 0; color: #fff; font-size: 32px; text-transform: uppercase; }
+    header p { color: #aaa; margin: 5px 0 0 0; font-size: 13px; }
+    
+    .create-box { width: 100%; max-width: 700px; margin-bottom: 25px; text-align: center; }
+    .create-link-btn { display: block; background: #f1c40f; color: #000; border: 1px solid #f39c12; padding: 12px; border-radius: 8px; font-weight: bold; text-decoration: none; font-size: 14px; text-transform: uppercase; box-shadow: 0 0 15px rgba(241,196,15,0.3); transition: 0.2s; }
+    .create-link-btn:hover { background: #d4ac0d; transform: scale(1.02); }
+
+    .az-bar { display: flex; justify-content: center; flex-wrap: wrap; gap: 5px; margin-bottom: 30px; background: #000; padding: 10px; border-radius: 8px; border: 1px solid #333; width: 100%; max-width: 700px; box-sizing: border-box; }
+    .az-btn { background: #262626; color: white; text-decoration: none; padding: 6px 10px; border-radius: 4px; font-weight: bold; font-size: 12px; border: 1px solid #444; transition: 0.2s; }
+    .az-btn:hover { background: #f1c40f; border-color: #f1c40f; color: #000; transform: scale(1.1); }
+    
+    .list-section { background: #1f1f1f; padding: 20px; border-radius: 10px; border: 1px solid #f1c40f; width: 100%; max-width: 700px; box-sizing: border-box; }
+    .list-title { font-size: 22px; margin-top: 0; color: #f1c40f; border-bottom: 2px solid #f1c40f; padding-bottom: 5px; font-weight: bold; text-transform: uppercase; margin-bottom: 15px; }
+    
+    .grid-links { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .star-card { background: #262626; padding: 12px; border-radius: 6px; border: 1px solid #333; text-decoration: none; color: white; font-weight: bold; font-size: 15px; transition: 0.2s; display: flex; justify-content: space-between; align-items: center; }
+    .star-card:hover { border-color: #f1c40f; background: #2d2d2d; transform: translateY(-2px); }
+    
+    .letter-badge { background: #f1c40f; color: #000; font-size: 10px; padding: 2px 6px; border-radius: 4px; text-transform: uppercase; font-weight: bold; }
+    .new-badge { background: #007bff !important; color: white !important; }
+
+    footer { background: #000; color: #666; text-align: center; padding: 15px; font-size: 12px; border-top: 1px solid #222; width: 100%; position: fixed; bottom: 0; left: 0; z-index: 100; }
+    footer strong { color: #aaa; }
+  </style>
+</head>
+<body>
+
+  <div class="navbar">
+    <div class="logo">Serienpedia 📺</div>
+    <a href="filmpedia.html" class="back-btn">← Zurück zu Filmpedia</a>
+  </div>
+
+  <div class="container">
+    <header>
+      <h1>Serienpedia Wiki</h1>
+      <p>Das unzensierte Episoden- und Staffelarchiv für Serien-Freaks</p>
+    </header>
+
+    <div class="create-box">
+      <a href="artikel_serie.html" class="create-link-btn">+ Neuen Serien-Artikel anlegen</a>
+    </div>
+
+    <div class="az-bar">
+      <a href="serien_a.html" class="az-btn">A</a> <a href="serien_b.html" class="az-btn">B</a> <a href="serien_c.html" class="az-btn">C</a> <a href="serien_d.html" class="az-btn">D</a> <a href="serien_e.html" class="az-btn">E</a> <a href="serien_f.html" class="az-btn">F</a> <a href="serien_g.html" class="az-btn">G</a> <a href="serien_h.html" class="az-btn">H</a> <a href="serien_i.html" class="az-btn">I</a> <a href="serien_j.html" class="az-btn">J</a> <a href="serien_k.html" class="az-btn">K</a> <a href="serien_l.html" class="az-btn">L</a> <a href="serien_m.html" class="az-btn">M</a> <a href="serien_n.html" class="az-btn">N</a> <a href="serien_o.html" class="az-btn">O</a> <a href="serien_p.html" class="az-btn">P</a> <a href="serien_q.html" class="az-btn">Q</a> <a href="serien_r.html" class="az-btn">R</a> <a href="serien_s.html" class="az-btn">S</a> <a href="serien_t.html" class="az-btn">T</a> <a href="serien_u.html" class="az-btn">U</a> <a href="serien_v.html" class="az-btn">V</a> <a href="serien_w.html" class="az-btn">W</a> <a href="serien_x.html" class="az-btn">X</a> <a href="serien_y.html" class="az-btn">Y</a> <a href="serien_z.html" class="az-btn">Z</a>
+    </div>
+
+    <div class="list-section">
+      <div class="list-title">📋 Registrierte Serien</div>
+      <div class="grid-links" id="seriesListContainer"></div>
+    </div>
+
+  </div>
+
+  <footer>
+    <p>© 2026 Filmpedia Wiki | Gegründet am: <strong>29. Mai 2026</strong> | Gründer: <strong>(Abby) Daniel.H</strong></p>
+  </footer>
+
+  <script>
+    // ALLES WAS ZÄHLT STEHT JETZT AN ERSTER STELLE ALS DEIN NEUESTER ARTIKEL!
+    let basisDaten = [
+      { name: "Alles was zählt", index: "A", link: "serien_a.html" },
+      { name: "The Last of Us", index: "T", link: "serien_t.html" }
+    ];
+
+    let gespeicherteSerien = JSON.parse(localStorage.getItem('wikiArtikelSerien')) || [];
+    let kompletteListe = [...gespeicherteSerien, ...basisDaten];
+
+    const container = document.getElementById('seriesListContainer');
+
+    kompletteListe.forEach((serie, index) => {
+      const card = document.createElement('a');
+      card.href = serie.link;
+      card.className = 'star-card';
+      
+      if (index === 0) {
+        card.innerHTML = `
+          <span>${serie.name}</span>
+          <span class="letter-badge new-badge">Neu</span>
+        `;
+      } else {
+        card.innerHTML = `
+          <span>${serie.name}</span>
+          <span class="letter-badge">Index ${serie.index}</span>
+        `;
+      }
+      container.appendChild(card);
+    });
+  </script>
+
+</body>
+</html>

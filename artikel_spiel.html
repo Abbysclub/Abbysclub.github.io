@@ -1,0 +1,125 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Gamingpedia - Neues Spiel eintragen</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #141414; margin: 20px; color: white; padding-bottom: 80px; }
+    .container { max-width: 800px; margin: auto; background: #1f1f1f; padding: 30px; border-radius: 10px; border: 1px solid #2ecc71; box-shadow: 0 4px 15px rgba(46, 204, 113, 0.2); }
+    .back-link { display: inline-block; margin-bottom: 20px; color: #2ecc71; text-decoration: none; font-weight: bold; }
+    .back-link:hover { text-decoration: underline; }
+    .form-group { margin-bottom: 20px; display: flex; flex-direction: column; gap: 5px; }
+    label { font-weight: bold; color: #2ecc71; font-size: 14px; text-transform: uppercase; }
+    input[type="text"] { background: #262626; color: white; border: 1px solid #444; padding: 10px; border-radius: 6px; font-size: 15px; }
+    input:focus { border-color: #2ecc71; outline: none; }
+    .save-btn { background: #2ecc71; color: #000; border: none; padding: 12px; border-radius: 6px; font-weight: bold; font-size: 16px; text-transform: uppercase; cursor: pointer; transition: 0.2s; width: 100%; margin-top: 10px; }
+    .save-btn:hover { background: #27ae60; color: white; transform: scale(1.02); }
+    .wiki-preview { margin-top: 40px; padding-top: 20px; border-top: 2px dashed #444; display: none; }
+    .wiki-header-layout { display: flex; gap: 20px; justify-content: space-between; align-items: flex-start; }
+    .wiki-text-side { flex: 1; }
+    .wiki-image { width: 220px; height: 280px; object-fit: cover; border-radius: 6px; border: 2px solid #2ecc71; background: #262626; display: none; }
+    .wiki-preview h2 { color: #2ecc71; border-bottom: 1px solid #333; padding-bottom: 5px; margin-top: 25px; font-size: 20px; }
+    .wiki-preview p { line-height: 1.6; color: #ccc; font-size: 16px; }
+    .bot-log { background: #000; border: 1px dashed #2ecc71; padding: 10px; font-family: monospace; font-size: 12px; color: #00ff00; margin-top: 15px; border-radius: 4px; display: none; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a class="back-link" href="gamingpedia.html">← Zurück zur Spiele-Übersicht</a>
+    <h1 style="margin-top:0; text-transform:uppercase; font-size: 28px; border-bottom: 1px solid #333; padding-bottom: 10px;">Neues Spiel im Wiki registrieren</h1>
+    
+    <div class="form-group">
+      <label>Cover-Dateiname</label>
+      <input type="text" id="gameImage" placeholder="z.B. GTA-VI-Cover.jpg">
+    </div>
+    <div class="form-group">
+      <label>Name des Spiels</label>
+      <input type="text" id="gameName" placeholder="z.B. Grand Theft Auto VI">
+    </div>
+    <div class="form-group">
+      <label>Entwicklerstudio &amp; Publisher</label>
+      <input type="text" id="gameStudio" placeholder="z.B. Rockstar Games">
+    </div>
+    <button class="save-btn" onclick="gamingBotSpeichern()">Spiel über Bot-Schnittstelle prüfen &amp; speichern</button>
+
+    <!-- LIVE-PROTOKOLL DES GAMING-BOTS -->
+    <div class="bot-log" id="botLogBox"></div>
+
+    <div class="wiki-preview" id="previewArea">
+      <div class="wiki-header-layout">
+        <div class="wiki-text-side">
+          <h1 id="viewName" style="text-transform: uppercase; margin-top: 0; margin-bottom: 10px; font-size: 32px;"></h1>
+          <p style="color:#aaa; margin: 0;"><strong>Kategorie:</strong> Uncensored Gaming-Wiki</p>
+          <p style="color:#aaa; margin: 5px 0 0 0;"><strong>Entwickler:</strong> <span id="viewStudio"></span></p>
+          <p style="color:#aaa; margin: 5px 0 0 0;"><strong>USK-Status / Zensur:</strong> <span style="color: #2ecc71; font-weight: bold;">Uncut Version</span></p>
+        </div>
+        <img class="wiki-image" id="viewImage" src="" alt="Spiel Cover">
+      </div>
+      <h2>Spiele-Beschreibung &amp; Uncut-Details</h2>
+      <p id="viewPlot" style="font-style: italic; color: #888;">Inhalt wird geladen... (Automatischer Gaming-Schnittstellen-Sync aktiv)</p>
+    </div>
+  </div>
+
+  <script>
+    function gamingBotSpeichern() {
+      const name = document.getElementById('gameName').value.trim();
+      const studio = document.getElementById('gameStudio').value.trim();
+      let image = document.getElementById('gameImage').value.trim();
+      const logBox = document.getElementById('botLogBox');
+      
+      if(!name) { alert("Bitte gib den Namen des Spiels ein!"); return; }
+
+      logBox.style.display = 'block';
+      logBox.innerHTML = "[GAMING-BOT] Starte Sicherheits-Check...<br>";
+
+      // 1. VANDALISMUS-SCHUTZ
+      const hackerPattern = /(<script>|DROP TABLE|OR 1=1)/i;
+      if (hackerPattern.test(name) || hackerPattern.test(studio) || hackerPattern.test(image)) {
+        logBox.innerHTML += "<span style='color:red;'>[BOT-ALARM] SECURITY-VIOLATION! SCHADCODE ERKANNT UND GEBLOCKT!</span>";
+        alert("Sicherheits-Verstoß! Der Bot verweigert das Speichern.");
+        return;
+      }
+
+      // 2. TEXTREINIGUNG (Doppelpunkte & Bindestriche vernichten!)
+      let bereinigterBildName = image;
+      if(bereinigterBildName) {
+        logBox.innerHTML += "[GAMING-BOT] Überprüfe Cover-Dateiname...<br>";
+        bereinigterBildName = bereinigterBildName.replace(/:/g, "");
+        if (bereinigterBildName.includes("-")) {
+          bereinigterBildName = bereinigterBildName.replace(/-/g, " ");
+          logBox.innerHTML += "<span style='color:#00ff00;'>[BOT-INFO] Falsche Bindestriche bereinigt. In echte Leerzeichen umgewandelt!</span><br>";
+        }
+      }
+
+      logBox.innerHTML += "[GAMING-BOT] Daten verifiziert. Spiel wird im grünen A-Z Archiv fehlerfrei brennend gesichert.<br>";
+
+      // Speichert in die Gaming-Liste
+      let bestehende = JSON.parse(localStorage.getItem('wikiArtikelSpiele')) || [];
+      let ersterBuchstabe = name.charAt(0).toUpperCase();
+
+      if (!bestehende.some(item => item.name === name)) {
+        bestehende.unshift({
+          name: name,
+          index: ersterBuchstabe,
+          link: `spiele_${ersterBuchstabe.toLowerCase()}.html`
+        });
+        localStorage.setItem('wikiArtikelSpiele', JSON.stringify(bestehende));
+      }
+
+      document.getElementById('viewName').innerText = name;
+      document.getElementById('viewStudio').innerText = studio ? studio : "Keine Angabe";
+
+      const imgElement = document.getElementById('viewImage');
+      if(image) { 
+        imgElement.src = bereinigterBildName; 
+        imgElement.style.display = 'block'; 
+        logBox.innerHTML += `[GAMING-BOT] Nutze sicheren Bildpfad: <strong>${bereinigterBildName}</strong><br>`;
+      } else { 
+        imgElement.style.display = 'none'; 
+      }
+
+      document.getElementById('previewArea').style.display = 'block';
+    }
+  </script>
+</body>
+</html>

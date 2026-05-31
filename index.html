@@ -1,0 +1,121 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Filmpedia Wiki - News Dashboard</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #141414; margin: 0; color: white; padding-bottom: 80px; }
+    .container { max-width: 1200px; margin: auto; padding: 10px; display: flex; flex-direction: column; align-items: center; }
+    
+    /* Perfekt ausbalancierte Navbar für alle 8 Buttons in einer Reihe */
+    .navbar { 
+      background: #000; 
+      padding: 10px 15px; 
+      display: flex; 
+      justify-content: space-between; 
+      align-items: center; 
+      border-bottom: 2px solid #ff0000; 
+      width: 100%; 
+      box-sizing: border-box; 
+    }
+    
+    .navbar .logo { font-size: 20px; color: #ff0000; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; white-space: nowrap; }
+    
+    /* Der Button-Container verteilt jetzt alle 8 Buttons absolut gleichmäßig über die gesamte Breite */
+    .nav-buttons-center { 
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+      gap: 5px; 
+      flex: 1; 
+      margin: 0 10px; 
+    }
+    
+    .nav-right-stack { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; }
+    
+    /* Kompakteres Einheits-Design, damit alles perfekt in eine Zeile passt */
+    .btn-base {
+      padding: 5px 8px; 
+      border-radius: 4px; 
+      font-weight: bold; 
+      text-transform: uppercase; 
+      text-align: center; 
+      font-size: 10px; 
+      text-decoration: none; 
+      transition: 0.2s;
+      white-space: nowrap;
+    }
+    .btn-base:hover { transform: scale(1.05); }
+    
+    /* 1. DARSTELLER (Neon-Blau) - IMDb Server */
+    .article-btn { background: #007bff; color: white; border: 1px solid #00c6ff; box-shadow: 0 0 8px rgba(0, 123, 255, 0.3); }
+
+    /* 2. SERIENPEDIA (Gold-Gelb) - IMDb Server */
+    .article-btn-series-main { background: #f1c40f; color: #000; border: 1px solid #f39c12; box-shadow: 0 0 8px rgba(241,196,15,0.2); }
+
+    /* 3. FILME (Filmpedia-Rot) - IMDb Server */
+    .article-btn-movies { background: #ff0000; color: white; border: 1px solid #ff3333; box-shadow: 0 0 8px rgba(255,0,0,0.3); }
+
+    /* NEU LINKS: 4. FESTIVAL (Neon-Pink/Magenta) - Eigener Festival Server */
+    .article-btn-festival { background: #ff007f; color: white; border: 1px solid #ff66b2; box-shadow: 0 0 10px rgba(255,0,127,0.4); }
+
+    /* 5. DARSTELLERINNEN (Lila-Pink-Rosa-Verlauf) - IMDb Server */
+    .article-btn-female { background: linear-gradient(90deg, #9b59b6 0%, #ff007f 50%, #ffb6c1 100%); color: white; border: none; padding: 6px 9px; box-shadow: 0 0 10px rgba(255, 0, 127, 0.3); }
+
+    /* 6. PORNOPEDIA (Neon-Orange) - Erwachsenen Server */
+    .article-btn-porno { background: #e67e22; color: white; border: 1px solid #f39c12; box-shadow: 0 0 8px rgba(230,126,34,0.3); }
+
+    /* 7. MUSIKPEDIA (Neon-Cyan) - Musik Server */
+    .article-btn-music { background: #00ced1; color: #000; border: 1px solid #00eee7; box-shadow: 0 0 8px rgba(0,206,209,0.3); }
+
+    /* 8. GAMINGPEDIA (Gamer-Grün) - Gaming Server */
+    .gaming-btn { background: #1f8b4c; color: white; border: 1px solid #2ecc71; box-shadow: 0 0 8px rgba(46,204,113,0.3); }
+    .gaming-btn:hover { background: #2ecc71; color: black; }
+
+    /* Sprachauswahl */
+    .lang-switch { background: #222; color: white; border: 1px solid #444; padding: 3px 5px; border-radius: 4px; cursor: pointer; font-size: 11px; width: 90px; text-align: center; }
+  </style>
+</head>
+<body>
+
+  <div class="navbar">
+    <!-- Links: Logo -->
+    <div class="logo">Filmpedia 🎬</div>
+    
+    <!-- Mitte: ALLE 8 BUTTONS pfeilgerade in einer Reihe aufgereiht! -->
+    <div class="nav-buttons-center">
+      <a href="wiki_darsteller.html" class="btn-base article-btn">Darsteller</a>
+      <a href="serienpedia.html" class="btn-base article-btn-series-main">Serienpedia</a>
+      <a href="wiki_filme.html" class="btn-base article-btn-movies">Filme</a>
+      <a href="wiki_festival.html" class="btn-base article-btn-festival">Festival</a>
+      <a href="wiki_darstellerinnen.html" class="btn-base article-btn-female">Darstellerinnen</a>
+      <a href="pornopedia.html" class="btn-base article-btn-porno">Pornopedia</a>
+      <a href="musikpedia.html" class="btn-base article-btn-music">Musikpedia</a>
+      <a href="gamingpedia.html" class="btn-base gaming-btn">Gamingpedia</a>
+    </div>
+    
+    <!-- Rechts: Sprachbox -->
+    <div class="nav-right-stack">
+      <select class="lang-switch">
+        <option value="de">Deutsch 🇩🇪</option>
+        <option value="en">English 🇬🇧</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="container">
+    <header>
+      <h1>Filmpedia Wiki</h1>
+      <p>Unzensiert & Uncut – Dein Film- und Serien-Newsmagazin</p>
+    </header>
+    
+    <div style="text-align:center; color:#888; font-style:italic; margin-top:50px;">
+      Das unzensierte Medien-Imperium ist nun vollständig ausgebaut. Alle Abteilungen sind lokal verknüpft...
+    </div>
+  </div>
+
+  <footer>
+    <p>© 2026 Filmpedia Wiki | Gegründet am: <strong>29. Mai 2026</strong> | Gründer: <strong>(Abby) Daniel.H</strong></p>
+  </footer>
+</body>
+</html>

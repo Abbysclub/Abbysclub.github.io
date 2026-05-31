@@ -1,0 +1,125 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Serienpedia - Neue Serie eintragen</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #141414; margin: 20px; color: white; padding-bottom: 80px; }
+    .container { max-width: 800px; margin: auto; background: #1f1f1f; padding: 30px; border-radius: 10px; border: 1px solid #f1c40f; box-shadow: 0 4px 15px rgba(241, 196, 15, 0.2); }
+    .back-link { display: inline-block; margin-bottom: 20px; color: #f1c40f; text-decoration: none; font-weight: bold; }
+    .back-link:hover { text-decoration: underline; }
+    .form-group { margin-bottom: 20px; display: flex; flex-direction: column; gap: 5px; }
+    label { font-weight: bold; color: #f1c40f; font-size: 14px; text-transform: uppercase; }
+    input[type="text"] { background: #262626; color: white; border: 1px solid #444; padding: 10px; border-radius: 6px; font-size: 15px; }
+    input:focus { border-color: #f1c40f; outline: none; }
+    .save-btn { background: #f1c40f; color: #000; border: none; padding: 12px; border-radius: 6px; font-weight: bold; font-size: 16px; text-transform: uppercase; cursor: pointer; transition: 0.2s; width: 100%; margin-top: 10px; }
+    .save-btn:hover { background: #d4ac0d; transform: scale(1.02); }
+    .wiki-preview { margin-top: 40px; padding-top: 20px; border-top: 2px dashed #444; display: none; }
+    .wiki-header-layout { display: flex; gap: 20px; justify-content: space-between; align-items: flex-start; }
+    .wiki-text-side { flex: 1; }
+    .wiki-image { width: 220px; height: 220px; object-fit: cover; border-radius: 6px; border: 2px solid #f1c40f; background: #262626; display: none; }
+    .wiki-preview h2 { color: #f1c40f; border-bottom: 1px solid #333; padding-bottom: 5px; margin-top: 25px; font-size: 20px; }
+    .wiki-preview p { line-height: 1.6; color: #ccc; font-size: 16px; }
+    .bot-log { background: #000; border: 1px dashed #f1c40f; padding: 10px; font-family: monospace; font-size: 12px; color: #00ff00; margin-top: 15px; border-radius: 4px; display: none; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a class="back-link" href="serienpedia.html">← Zurück zur Serien-Übersicht</a>
+    <h1 style="margin-top:0; text-transform:uppercase; font-size: 28px; border-bottom: 1px solid #333; padding-bottom: 10px;">Neue Serie im Wiki registrieren</h1>
+    
+    <div class="form-group">
+      <label>Cover-Dateiname</label>
+      <input type="text" id="seriesImage" placeholder="z.B. alles-was-zählt.jpg">
+    </div>
+    <div class="form-group">
+      <label>Name der Serie</label>
+      <input type="text" id="seriesName" placeholder="z.B. Alles was zählt">
+    </div>
+    <div class="form-group">
+      <label>Hauptdarsteller</label>
+      <input type="text" id="seriesCast" placeholder="z.B. Tatjana Clasing, Silvan-Pierre Leirich">
+    </div>
+    <button class="save-btn" onclick="seriesBotSpeichern()">Serie über Bot-Schnittstelle prüfen &amp; speichern</button>
+
+    <!-- LIVE-PROTOKOLL DES SERIEN-BOTS -->
+    <div class="bot-log" id="botLogBox"></div>
+
+    <div class="wiki-preview" id="previewArea">
+      <div class="wiki-header-layout">
+        <div class="wiki-text-side">
+          <h1 id="viewName" style="text-transform: uppercase; margin-top: 0; margin-bottom: 10px; font-size: 32px;"></h1>
+          <p style="color:#aaa; margin: 0;"><strong>Kategorie:</strong> Serienpedia-Archiv</p>
+          <p style="color:#aaa; margin: 5px 0 0 0;"><strong>Umfang:</strong> Wird geladen... (Automatischer Episoden-Sync aktiv)</p>
+          <p style="color:#aaa; margin: 5px 0 0 0;"><strong>Hauptdarsteller:</strong> <span id="viewCast"></span></p>
+        </div>
+        <img class="wiki-image" id="viewImage" src="" alt="Serien Cover">
+      </div>
+      <h2>Handlung &amp; Episodenguide</h2>
+      <p id="viewPlot" style="font-style: italic; color: #888;">Inhalt wird geladen... (Automatischer Serien-Wiki-Abruf aktiv)</p>
+    </div>
+  </div>
+
+  <script>
+    function seriesBotSpeichern() {
+      const name = document.getElementById('seriesName').value.trim();
+      const cast = document.getElementById('seriesCast').value.trim();
+      let image = document.getElementById('seriesImage').value.trim();
+      const logBox = document.getElementById('botLogBox');
+      
+      if(!name) { alert("Bitte gib den Namen der Serie ein!"); return; }
+
+      logBox.style.display = 'block';
+      logBox.innerHTML = "[SERIEN-BOT] Starte Sicherheits-Schnittstelle...<br>";
+
+      // 1. VANDALISMUS-FILTER gegen Hacker
+      const hackerPattern = /(<script>|DROP TABLE|OR 1=1)/i;
+      if (hackerPattern.test(name) || hackerPattern.test(cast) || hackerPattern.test(image)) {
+        logBox.innerHTML += "<span style='color:red;'>[BOT-ALARM] SECURITY-BLOCK! UNZULÄSSIGER CODE VERWEIGERT!</span>";
+        alert("Sicherheits-Verstoß! Der Bot verweigert das Speichern.");
+        return;
+      }
+
+      // 2. TEXTREINIGUNG (Das Bindestrich- & Doppelpunkt-Schild!)
+      let bereinigterBildName = image;
+      if(bereinigterBildName) {
+        logBox.innerHTML += "[SERIEN-BOT] Überprüfe Cover-Dateiname...<br>";
+        bereinigterBildName = bereinigterBildName.replace(/:/g, "");
+        if (bereinigterBildName.includes("-")) {
+          bereinigterBildName = bereinigterBildName.replace(/-/g, " ");
+          logBox.innerHTML += "<span style='color:#00ff00;'>[BOT-INFO] Bindestriche erkannt. Automatisch in echte Leerzeichen umgewandelt!</span><br>";
+        }
+      }
+
+      logBox.innerHTML += "[SERIEN-BOT] Daten verifiziert. Serie wird im gold-gelben Archiv fehlerfrei brennend gesichert.<br>";
+
+      // Speichert in die Serien-Liste
+      let bestehende = JSON.parse(localStorage.getItem('wikiArtikelSerien')) || [];
+      let ersterBuchstabe = name.charAt(0).toUpperCase();
+
+      if (!bestehende.some(item => item.name === name)) {
+        bestehende.unshift({
+          name: name,
+          index: ersterBuchstabe,
+          link: `serien_${ersterBuchstabe.toLowerCase()}.html`
+        });
+        localStorage.setItem('wikiArtikelSerien', JSON.stringify(bestehende));
+      }
+
+      document.getElementById('viewName').innerText = name;
+      document.getElementById('viewCast').innerText = cast ? cast : "Keine Angabe";
+
+      const imgElement = document.getElementById('viewImage');
+      if(image) { 
+        imgElement.src = bereinigterBildName; 
+        imgElement.style.display = 'block'; 
+        logBox.innerHTML += `[SERIEN-BOT] Nutze sicheren Bildpfad: <strong>${bereinigterBildName}</strong><br>`;
+      } else { 
+        imgElement.style.display = 'none'; 
+      }
+
+      document.getElementById('previewArea').style.display = 'block';
+    }
+  </script>
+</body>
+</html>

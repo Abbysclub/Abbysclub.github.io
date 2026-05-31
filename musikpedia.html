@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Musikpedia Wiki - Hauptseite</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #141414; margin: 0; color: white; padding-bottom: 80px; }
+    .container { max-width: 1000px; margin: auto; padding: 20px; display: flex; flex-direction: column; align-items: center; }
+    .navbar { background: #000; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #00ced1; width: 100%; box-sizing: border-box; }
+    .navbar .logo { font-size: 24px; color: #00ced1; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
+    .back-btn { background: #222; color: white; border: 1px solid #444; padding: 6px 12px; border-radius: 5px; font-weight: bold; text-decoration: none; font-size: 13px; text-transform: uppercase; }
+    .back-btn:hover { background: #00ced1; border-color: #00ced1; color: #000; }
+    header { background: linear-gradient(180deg, #000, #1f1f1f); padding: 25px 20px; text-align: center; border-radius: 10px; margin-bottom: 40px; border: 1px solid #333; width: 100%; max-width: 700px; box-sizing: border-box; }
+    header h1 { margin: 0; color: #fff; font-size: 32px; text-transform: uppercase; }
+    header p { color: #aaa; margin: 5px 0 0 0; font-size: 13px; }
+    .section-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; width: 100%; max-width: 700px; }
+    .music-box { background: #1f1f1f; border: 2px solid #00ced1; border-radius: 10px; padding: 30px 20px; text-align: center; text-decoration: none; color: white; transition: 0.2s; box-shadow: 0 0 15px rgba(0, 206, 209, 0.1); display: flex; flex-direction: column; justify-content: center; }
+    .music-box:hover { background: #262626; transform: translateY(-4px); box-shadow: 0 0 25px rgba(0, 206, 209, 0.4); border-color: #00eee7; }
+    .music-box h2 { margin: 0 0 10px 0; color: #00ced1; text-transform: uppercase; font-size: 20px; }
+    .music-box p { margin: 0; color: #aaa; font-size: 13px; line-height: 1.4; }
+    footer { background: #000; color: #666; text-align: center; padding: 15px; font-size: 12px; border-top: 1px solid #222; width: 100%; position: fixed; bottom: 0; left: 0; z-index: 100; }
+    footer strong { color: #aaa; }
+  </style>
+</head>
+<body>
+  <div class="navbar">
+    <div class="logo">Musikpedia 🎵</div>
+    <a href="filmpedia.html" class="back-btn">← Zurück zur Startseite</a>
+  </div>
+  <div class="container">
+    <header>
+      <h1>Musikpedia Sektion</h1>
+      <p>Wähle eine Kategorie aus, um das unzensierte Audioarchiv zu durchsuchen</p>
+    </header>
+    <div class="section-grid">
+      <a href="musik_alben.html" class="music-box">
+        <h2>💽 Alben &amp; Soundtracks</h2>
+        <p>Filmmusik, Alben, Tracklisten und unzensierte Songs von A-Z</p>
+      </a>
+      <a href="musik_kuenstler.html" class="music-box">
+        <h2>🎧 DJs &amp; Interpreten</h2>
+        <p>Biografien, Profile, Bands, Rapper und DJs von A-Z</p>
+      </a>
+    </div>
+  </div>
+  <footer><p>© 2026 Filmpedia Wiki | Gründer: <strong>(Abby) Daniel.H</strong></p></footer>
+</body>
+</html>
