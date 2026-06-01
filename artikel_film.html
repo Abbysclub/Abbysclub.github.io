@@ -47,7 +47,7 @@
   </div>
 
   <script>
-    async function botLiveAbruf() {
+    function botLiveAbruf() {
       const searchTitle = document.getElementById('movieName').value.trim();
       const logBox = document.getElementById('botLogBox');
       const apiKey = "94409cce";
@@ -55,17 +55,13 @@
       if(!searchTitle) { alert("Bitte gib einen Filmnamen ein!"); return; }
 
       logBox.style.display = 'block';
-      logBox.innerHTML = `[BOT] Klinke in IMDb-Leitung ein...<br>[BOT] Suche nach Film: <strong>${searchTitle}</strong>...<br>`;
+      logBox.innerHTML = `[BOT] Starte unblockierbaren JSONP-Kanal...<br>[BOT] Verbinde mit IMDb-Spiegel...<br>`;
 
-      try {
-            const proxyRes = await fetch(`https://corsproxy.io{encodeURIComponent(`https://omdbapi.com{encodeURIComponent(searchTitle)}&apikey=${apiKey}`)}`);
-    const data = await proxyRes.json();
-
-
-        if(data.Response === "True") {
-          logBox.innerHTML += "<span style='color:#00ff00;'>[BOT-SUCCESS] Server-Sync erfolgreich!</span><br>";
+      // Wir löschen eine eventuell alte geladene Funktion
+      window.omdbCallback = function(data) {
+        if(data && data.Response === "True") {
+          logBox.innerHTML += "<span style='color:#00ff00;'>[BOT-SUCCESS] Daten unzensiert eingesaugt!</span><br>";
           
-          // Automatisches Ersatzbild, falls IMDb kein Cover hat
           let coverUrl = (data.Poster && data.Poster !== "N/A") ? data.Poster : "https://unsplash.com";
 
           document.getElementById('viewName').innerText = data.Title;
@@ -76,14 +72,12 @@
           document.getElementById('viewImage').src = coverUrl;
           document.getElementById('previewArea').style.display = 'block';
 
-          // Doppelungs-Schutz: Prüft, ob der Film schon existiert
+          // Datenbank-Bereinigung: Wirft die kaputten N/A-Doppelungen von vorhin raus!
           let bestehende = JSON.parse(localStorage.getItem('wikiArtikelFilme')) || [];
           let ersterBuchstabe = data.Title.charAt(0).toUpperCase();
           
-          // Löscht eventuelle alte Doppelungen von vorhin heraus
           bestehende = bestehende.filter(item => item.name.toLowerCase() !== data.Title.toLowerCase());
           
-          // Speichert den neuen Film mit dem echten Internet-Bild-Link ab!
           bestehende.unshift({ 
             name: data.Title, 
             index: ersterBuchstabe, 
@@ -96,14 +90,19 @@
           });
           
           localStorage.setItem('wikiArtikelFilme', JSON.stringify(bestehende));
-          logBox.innerHTML += "[BOT-INFO] Datenbank erfolgreich aktualisiert und bereinigt.";
-
+          logBox.innerHTML += "[BOT-INFO] S- und H-Register vollautomatisch aktualisiert!";
         } else {
-          logBox.innerHTML += `<span style='color:red;'>[BOT-FEHLER] Film nicht gefunden! (${data.Error})</span>`;
+          logBox.innerHTML += `<span style='color:red;'>[BOT-FEHLER] Film nicht auf Server gefunden! (${data ? data.Error : 'Timeout'})</span>`;
         }
-      } catch (error) {
-        logBox.innerHTML += "<span style='color:red;'>[BOT-ALARM] Verbindungsfehler!</span>";
-      }
+        // Räumt das geladene Skript wieder auf
+        document.getElementById('jsonpScript').remove();
+      };
+
+      // Der magische Trick: Erstellt ein dynamisches Skript, das die Chrome-Sperre komplett ignoriert
+      const script = document.createElement('script');
+      script.id = 'jsonpScript';
+      script.src = `https://omdbapi.com{encodeURIComponent(searchTitle)}&apikey=${apiKey}&callback=omdbCallback`;
+      document.body.appendChild(script);
     }
   </script>
 </body>
