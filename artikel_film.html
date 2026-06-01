@@ -58,8 +58,7 @@
       logBox.innerHTML = `[BOT] Klinke in IMDb-Leitung ein...<br>[BOT] Suche nach Film: <strong>${searchTitle}</strong>...<br>`;
 
       try {
-        const response = await fetch(`https://omdbapi.com{encodeURIComponent(searchTitle)}&apikey=${apiKey}`);
-        const data = await response.json();
+        const response = await fetch(`https://allorigins.win{encodeURIComponent(`https://omdbapi.com{encodeURIComponent(searchTitle)}&apikey=${apiKey}`)}`).then(res => res.json()).then(data => JSON.parse(data.contents));
 
         if(data.Response === "True") {
           logBox.innerHTML += "<span style='color:#00ff00;'>[BOT-SUCCESS] Server-Sync erfolgreich!</span><br>";
