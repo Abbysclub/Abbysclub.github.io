@@ -101,7 +101,12 @@
       // Der magische Trick: Erstellt ein dynamisches Skript, das die Chrome-Sperre komplett ignoriert
       const script = document.createElement('script');
       script.id = 'jsonpScript';
-      script.src = "https://omdbapi.com/?t=" + encodeURIComponent(searchTitle) + "&apikey=" + apiKey + "&callback=omdbCallback";
+            if (searchTitle.startsWith("tt")) {
+        script.src = "https://omdbapi.com/?i=" + encodeURIComponent(searchTitle) + "&apikey=" + apiKey + "&callback=omdbCallback";
+      } else {
+        script.src = "https://omdbapi.com/?t=" + encodeURIComponent(searchTitle) + "&apikey=" + apiKey + "&callback=omdbCallback";
+      }
+
       document.body.appendChild(script);
     }
   </script>
