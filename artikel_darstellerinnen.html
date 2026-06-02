@@ -2,14 +2,15 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Filmpedia - Darstellerinnen Admin Bot</title>
+  <title>Filmpedia - Darstellerinnen High-Tech Admin Bot</title>
   <style>
     body { font-family: Arial, sans-serif; background: #141414; margin: 20px; color: white; padding-bottom: 80px; display: none; }
     .container { max-width: 800px; margin: auto; background: #1f1f1f; padding: 30px; border-radius: 10px; border: 2px solid #6f42c1; box-shadow: 0 4px 15px rgba(111, 66, 193, 0.4); }
     .back-link { display: inline-block; margin-bottom: 20px; color: #6f42c1; text-decoration: none; font-weight: bold; }
     .form-group { margin-bottom: 20px; display: flex; flex-direction: column; gap: 5px; }
     label { font-weight: bold; color: #6f42c1; font-size: 14px; text-transform: uppercase; }
-    input[type="text"] { background: #262626; color: white; border: 1px solid #444; padding: 10px; border-radius: 6px; font-size: 15px; width: 100%; box-sizing: border-box; }
+    input[type="text"], textarea { background: #262626; color: white; border: 1px solid #444; padding: 10px; border-radius: 6px; font-size: 15px; width: 100%; box-sizing: border-box; font-family: Arial, sans-serif; }
+    textarea { height: 100px; resize: vertical; }
     .save-btn { background: #6f42c1; color: white; border: none; padding: 12px; border-radius: 6px; font-weight: bold; font-size: 16px; text-transform: uppercase; cursor: pointer; width: 100%; }
     .save-btn:hover { background: #5a32a3; }
     .wiki-preview { margin-top: 40px; padding-top: 20px; border-top: 2px dashed #444; display: none; }
@@ -26,9 +27,21 @@
     <h1 style="margin-top:0; text-transform:uppercase; font-size: 26px; border-bottom: 1px solid #333; padding-bottom: 10px;">👑 DARSTELLERINNEN-BOT: Star registrieren</h1>
     
     <div class="form-group">
-      <label>Name des Stars oder IMDb-Personen-ID (z.B. Bree Olson)</label>
+      <label>Name des Stars oder IMDb-Personen-ID</label>
       <input type="text" id="starName" placeholder="Name der Schauspielerin eingeben...">
     </div>
+
+    <!-- DEINE NEUEN UNZENSIERTEN ZUSATZFELDER -->
+    <div class="form-group">
+      <label>🎬 Aktuelle Projekte &amp; Uncut-Szenen</label>
+      <textarea id="customUncut" placeholder="Hier unzensierte Filmhighlights oder aktuelle Szenen eintragen..."></textarea>
+    </div>
+
+    <div class="form-group">
+      <label>✍️ Biografie &amp; Karriere (Optional)</label>
+      <textarea id="customBio" placeholder="Wird automatisch von IMDb geladen, kann aber hier von dir erweitert werden..."></textarea>
+    </div>
+
     <button class="save-btn" onclick="botLiveAbruf()">Star über Live-Server abrufen &amp; sichern</button>
 
     <div class="bot-log" id="botLogBox"></div>
@@ -38,9 +51,9 @@
         <div class="wiki-text-side">
           <h1 id="viewName" style="text-transform: uppercase; margin-top: 0; color: #6f42c1;"></h1>
           <p><strong>Geburtsdatum / Jahr:</strong> <span id="viewYear"></span></p>
-          <p><strong>Bekannt für (Regie/Filme):</strong> <span id="viewDirector"></span></p>
-          <p><strong>Auszeichnungen / Crew:</strong> <span id="viewCast"></span></p>
-          <p><strong>Biografie (IMDb):</strong> <span id="viewPlot"></span></p>
+          <p><strong>Bekannt für:</strong> <span id="viewGenre"></span></p>
+          <p><strong>Uncut-Szenen &amp; Projekte:</strong> <span id="viewUncut"></span></p>
+          <p><strong>Biografie &amp; Karriere:</strong> <span id="viewPlot"></span></p>
         </div>
         <img class="wiki-image" id="viewImage" src="" alt="Star Poster">
       </div>
@@ -48,7 +61,7 @@
   </div>
 
   <script>
-    // 🔐 EINBRUCHSCHUTZ (ADMIN PIN)
+    // 🔐 SECURE ADMIN PIN
     const pin = prompt("[SECURITY] Darstellerinnen-Zentrale gesichert. Admin-Pin eingeben:");
     if (pin === "1994" || pin === "abby") {
       document.body.style.display = "block";
@@ -59,29 +72,35 @@
 
     function botLiveAbruf() {
       const searchTitle = document.getElementById('starName').value.trim();
+      const inputUncut = document.getElementById('customUncut').value.trim();
+      const inputBio = document.getElementById('customBio').value.trim();
       const logBox = document.getElementById('botLogBox');
       const apiKey = "94409cce"; 
 
       if(!searchTitle) { alert("Bitte Namen eingeben!"); return; }
 
       logBox.style.display = 'block';
-      logBox.innerHTML = `[BOT] Aktiviere lila Schutzschilde...<br>[BOT] Klinke in IMDb-Star-Leitung ein...<br>`;
+      logBox.innerHTML = `[BOT] Klinke in IMDb-Star-Leitung ein...<br>`;
 
       window.omdbCallback = function(data) {
         if(data && data.Response === "True") {
           logBox.innerHTML += "<span style='color:#00ff00;'>[BOT-SUCCESS] Star-Biografie eingesaugt!</span><br>";
           
-          let coverUrl = (data.Poster && data.Poster !== "N/A") ? data.Poster : "Supergirl.jpg";
+          // ZIEHT DAS LIVE-BILD DIREKT VOM IMDB SERVER! [1.1]
+          let coverUrl = (data.Poster && data.Poster !== "N/A") ? data.Poster : "https://unsplash.com";
+
+          // Wenn du selbst Text eingetippt hast, nimmt er deinen. Sonst den von IMDb! [1.1]
+          let finalBio = inputBio ? inputBio : data.Plot;
+          let finalUncut = inputUncut ? inputUncut : "Keine aktuellen Uncut-Einträge hinterlegt.";
 
           document.getElementById('viewName').innerText = data.Title;
           document.getElementById('viewYear').innerText = data.Year;
-          document.getElementById('viewDirector').innerText = data.Genre;
-          document.getElementById('viewCast').innerText = data.Actors;
-          document.getElementById('viewPlot').innerText = data.Plot;
+          document.getElementById('viewGenre').innerText = data.Genre;
+          document.getElementById('viewUncut').innerText = finalUncut;
+          document.getElementById('viewPlot').innerText = finalBio;
           document.getElementById('viewImage').src = coverUrl;
           document.getElementById('previewArea').style.display = 'block';
 
-          // Automatisches Einsortieren ins Darstellerinnen-Gedächtnis
           let bestehende = JSON.parse(localStorage.getItem('wikiArtikelDarstellerinnen')) || [];
           let ersterBuchstabe = data.Title.charAt(0).toUpperCase();
           
@@ -91,11 +110,11 @@
             name: data.Title, 
             index: ersterBuchstabe, 
             flag: "LIVE-SYNC",
-            poster: coverUrl,
+            poster: coverUrl, // Das Live-Internet-Bild wird direkt in der Datenbank verankert! [1.1]
             year: data.Year,
             genre: data.Genre,
-            cast: data.Actors,
-            plot: data.Plot
+            uncut: finalUncut,
+            plot: finalBio
           });
           
           localStorage.setItem('wikiArtikelDarstellerinnen', JSON.stringify(bestehende));
@@ -108,7 +127,11 @@
 
       const script = document.createElement('script');
       script.id = 'jsonpScript';
-      script.src = "https://omdbapi.com" + encodeURIComponent(searchTitle) + "&apikey=" + apiKey + "&callback=omdbCallback";
+      if (searchTitle.startsWith("tt")) {
+        script.src = "https://omdbapi.com" + encodeURIComponent(searchTitle) + "&apikey=" + apiKey + "&callback=omdbCallback";
+      } else {
+        script.src = "https://omdbapi.com" + encodeURIComponent(searchTitle) + "&apikey=" + apiKey + "&callback=omdbCallback";
+      }
       document.body.appendChild(script);
     }
   </script>
