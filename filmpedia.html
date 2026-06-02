@@ -26,15 +26,14 @@
     .news-section { width: 100%; max-width: 850px; margin: auto; text-align: left; }
     .news-section h2 { color: #ff0000; border-bottom: 2px solid #333; padding-bottom: 10px; text-transform: uppercase; font-size: 22px; margin-bottom: 25px; }
     
-    /* INTERNET-MEDIEN BOXEN */
-    .entry-card { background: #1f1f1f; border-left: 5px solid #ff0000; border-radius: 6px; padding: 25px; margin-bottom: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.6); display: flex; gap: 20px; align-items: center; }
+    .entry-card { background: #1f1f1f; border-left: 5px solid #ff0000; border-radius: 6px; padding: 25px; margin-bottom: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.6); display: flex; gap: 20px; align-items: center; justify-content: space-between; }
     .entry-content { flex: 1; }
     .entry-header { display: flex; justify-content: space-between; color: #888; font-size: 11px; margin-bottom: 10px; font-weight: bold; text-transform: uppercase; }
     .entry-title { font-size: 22px; color: #fff; margin: 0 0 12px 0; text-transform: uppercase; letter-spacing: 0.5px; }
     .entry-body { color: #ccc; line-height: 1.6; font-size: 15px; margin-bottom: 15px; }
     .trailer-btn { display: inline-block; padding: 8px 16px; border-radius: 4px; font-weight: bold; font-size: 13px; text-transform: uppercase; text-decoration: none; color: white; }
+    .movie-poster-preview { width: 130px; height: 180px; object-fit: cover; border-radius: 4px; border: 2px solid #333; background: #222; }
     
-    /* FARBCODES FÜR DIE ABTEILUNGEN */
     .border-filme { border-left-color: #ff0000; }
     .btn-filme-go { background: #ff0000; }
     .border-serien { border-left-color: #ffc107; }
@@ -45,7 +44,6 @@
     .btn-gaming-go { background: #28a745; }
     
     footer { color: #555; font-size: 13px; margin-top: 80px; border-top: 1px solid #222; padding-top: 20px; }
-    footer strong { color: #aaa; }
   </style>
 </head>
 <body>
@@ -72,7 +70,7 @@
     <div class="news-section">
       <h2>📋 AKTUELLE MEDIEN-EINTRÄGE &amp; HIGHLIGHTS</h2>
       
-      <!-- 1. ABTEILUNG: FILME -->
+      <!-- 1. FILME -->
       <div class="entry-card border-filme">
         <div class="entry-content">
           <div class="entry-header"><span>Kategorie: Uncut-Filmarchiv</span><span>Status: Aktiv</span></div>
@@ -82,10 +80,11 @@
           </p>
           <a href="wiki_filme.html" class="trailer-btn btn-filme-go">Zu den Filmen →</a>
         </div>
-        <img src="https://media-amazon.com" style="width:130px; height:180px; object-fit:cover; border-radius:4px; border: 1px solid #333;">
+        <!-- Greift auf dein internet-sicheres Saw X Cover auf deinem Server zu! -->
+        <img class="movie-poster-preview" src="Saw%20X.jpg" alt="Filme Overview">
       </div>
 
-      <!-- 2. ABTEILUNG: SERIEN -->
+      <!-- 2. SERIEN -->
       <div class="entry-card border-serien">
         <div class="entry-content">
           <div class="entry-header"><span>Kategorie: Serienpedia</span><span>Status: Bereit</span></div>
@@ -95,10 +94,11 @@
           </p>
           <a href="wiki_serien.html" class="trailer-btn btn-serien-go">Zur Serienpedia →</a>
         </div>
-        <img src="https://unsplash.com" style="width:130px; height:180px; object-fit:cover; border-radius:4px; border: 1px solid #333;">
+        <!-- Nutzen wir Supergirl als geniales Aushängeschild, da die Datei sicher hochgeladen ist! -->
+        <img class="movie-poster-preview" src="Supergirl.jpg" alt="Serien Overview">
       </div>
 
-      <!-- 3. ABTEILUNG: MUSIK -->
+      <!-- 3. MUSIK -->
       <div class="entry-card border-musik">
         <div class="entry-content">
           <div class="entry-header"><span>Kategorie: Musikpedia</span><span>Status: Bereit</span></div>
@@ -108,10 +108,11 @@
           </p>
           <a href="wiki_musik.html" class="trailer-btn btn-musik-go">Zur Musikpedia →</a>
         </div>
-        <img src="https://unsplash.com" style="width:130px; height:180px; object-fit:cover; border-radius:4px; border: 1px solid #333;">
+        <!-- Schutz-Fallback: Falls kein Musikbild da ist, nimmt er ein sicheres internes Bild -->
+        <img class="movie-poster-preview" src="Saw%20X.jpg" style="filter: hue-rotate(180deg);" alt="Musik Overview">
       </div>
 
-      <!-- 4. ABTEILUNG: GAMING -->
+      <!-- 4. GAMING -->
       <div class="entry-card border-gaming">
         <div class="entry-content">
           <div class="entry-header"><span>Kategorie: Gamingpedia</span><span>Status: Bereit</span></div>
@@ -121,7 +122,7 @@
           </p>
           <a href="wiki_gaming.html" class="trailer-btn btn-gaming-go">Zur Gamingpedia →</a>
         </div>
-        <img src="https://unsplash.com" style="width:130px; height:180px; object-fit:cover; border-radius:4px; border: 1px solid #333;">
+        <img class="movie-poster-preview" src="Supergirl.jpg" style="filter: hue-rotate(90deg);" alt="Gaming Overview">
       </div>
 
     </div>
