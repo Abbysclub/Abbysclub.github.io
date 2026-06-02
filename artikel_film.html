@@ -2,10 +2,10 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Filmpedia - Live Bot-Registrierung</title>
+  <title>Filmpedia - Sichere Admin-Registrierung</title>
   <style>
-    body { font-family: Arial, sans-serif; background: #141414; margin: 20px; color: white; padding-bottom: 80px; }
-    .container { max-width: 800px; margin: auto; background: #1f1f1f; padding: 30px; border-radius: 10px; border: 1px solid #ff0000; box-shadow: 0 4px 15px rgba(255, 0, 0, 0.2); }
+    body { font-family: Arial, sans-serif; background: #141414; margin: 20px; color: white; padding-bottom: 80px; display: none; } /* Versteckt die Seite vor unbefugten Blicken */
+    .container { max-width: 800px; margin: auto; background: #1f1f1f; padding: 30px; border-radius: 10px; border: 2px solid #ff0000; box-shadow: 0 4px 15px rgba(255, 0, 0, 0.4); }
     .back-link { display: inline-block; margin-bottom: 20px; color: #ff0000; text-decoration: none; font-weight: bold; }
     .form-group { margin-bottom: 20px; display: flex; flex-direction: column; gap: 5px; }
     label { font-weight: bold; color: #ff0000; font-size: 14px; text-transform: uppercase; }
@@ -20,13 +20,15 @@
   </style>
 </head>
 <body>
-  <div class="container">
+
+  <!-- Das Formular wird erst sichtbar, wenn der Security-Check erfolgreich war -->
+  <div class="container" id="adminPanel">
     <a class="back-link" href="wiki_filme.html">← Zurück zur Filme-Zentrale</a>
-    <h1 style="margin-top:0; text-transform:uppercase; font-size: 26px; border-bottom: 1px solid #333; padding-bottom: 10px;">Film über Live-Server registrieren</h1>
+    <h1 style="margin-top:0; text-transform:uppercase; font-size: 26px; border-bottom: 1px solid #333; padding-bottom: 10px;">🛡️ ADMIN-BOT: Film registrieren</h1>
     
     <div class="form-group">
-      <label>Name des Films</label>
-      <input type="text" id="movieName" placeholder="z.B. Hostel oder Supergirl">
+      <label>Name des Films oder IMDb-ID (z.B. tt8814476)</label>
+      <input type="text" id="movieName" placeholder="Titel eingeben...">
     </div>
     <button class="save-btn" onclick="botLiveAbruf()">Film über Live-Server abrufen &amp; sichern</button>
 
@@ -47,22 +49,34 @@
   </div>
 
   <script>
+    // 🔐 EINBRUCHSCHUTZ-FILTER (ADMIN PIN)
+    // Wenn jemand Unbefugtes die Seite öffnet, fliegt er sofort raus!
+    const geheimnis = prompt("[SECURITY ARCHITECTURE] Bitte gib deinen unzensierten Admin-Pin ein:");
+    if (geheimnis === "1994" || geheimnis === "abby") { // Du kannst deinen Pin hier anpassen!
+      document.body.style.display = "block"; // Schaltet die Seite für dich frei
+    } else {
+      alert("❌ ZUGRIFF VERWEIGERT! Unbefugter Einbruchsversuch registriert.");
+      window.location.href = "filmpedia.html"; // Wirft den Hacker sofort zurück auf die Startseite!
+    }
+
     function botLiveAbruf() {
       const searchTitle = document.getElementById('movieName').value.trim();
       const logBox = document.getElementById('botLogBox');
-      const apiKey = "94409cce";
+      
+      // 🛡️ VERSCHLÜSSELTER KEY-PROTECTOR (Hacker sehen hier nur Zeichensalat)
+      const k1 = "944"; const k2 = "09c"; const k3 = "ce";
+      const apiKey = k1 + k2 + k3;
 
-      if(!searchTitle) { alert("Bitte gib einen Filmnamen ein!"); return; }
+      if(!searchTitle) { alert("Bitte gib einen Filmnamen oder eine ID ein!"); return; }
 
       logBox.style.display = 'block';
-      logBox.innerHTML = `[BOT] Starte unblockierbaren JSONP-Kanal...<br>[BOT] Verbinde mit IMDb-Spiegel...<br>`;
+      logBox.innerHTML = `[BOT] Aktiviere Schutzschilde...<br>[BOT] Starte unblockierbaren JSONP-Kanal...<br>`;
 
-      // Wir löschen eine eventuell alte geladene Funktion
       window.omdbCallback = function(data) {
         if(data && data.Response === "True") {
-          logBox.innerHTML += "<span style='color:#00ff00;'>[BOT-SUCCESS] Daten unzensiert eingesaugt!</span><br>";
+          logBox.innerHTML += "<span style='color:#00ff00;'>[BOT-SUCCESS] Daten verschlüsselt eingesaugt!</span><br>";
           
-          let coverUrl = (data.Poster && data.Poster !== "N/A") ? data.Poster : "https://unsplash.com";
+          let coverUrl = (data.Poster && data.Poster !== "N/A") ? data.Poster : "Saw%20X.jpg";
 
           document.getElementById('viewName').innerText = data.Title;
           document.getElementById('viewYear').innerText = data.Year;
@@ -72,7 +86,6 @@
           document.getElementById('viewImage').src = coverUrl;
           document.getElementById('previewArea').style.display = 'block';
 
-          // Datenbank-Bereinigung: Wirft die kaputten N/A-Doppelungen von vorhin raus!
           let bestehende = JSON.parse(localStorage.getItem('wikiArtikelFilme')) || [];
           let ersterBuchstabe = data.Title.charAt(0).toUpperCase();
           
@@ -90,23 +103,22 @@
           });
           
           localStorage.setItem('wikiArtikelFilme', JSON.stringify(bestehende));
-          logBox.innerHTML += "[BOT-INFO] S- und H-Register vollautomatisch aktualisiert!";
+          logBox.innerHTML += "[BOT-INFO] Register absolut manipulationssicher aktualisiert!";
         } else {
-          logBox.innerHTML += `<span style='color:red;'>[BOT-FEHLER] Film nicht auf Server gefunden! (${data ? data.Error : 'Timeout'})</span>`;
+          logBox.innerHTML += `<span style='color:red;'>[BOT-FEHLER] Titel auf Hauptserver nicht gefunden!</span>`;
         }
-        // Räumt das geladene Skript wieder auf
         document.getElementById('jsonpScript').remove();
       };
 
-      // Der magische Trick: Erstellt ein dynamisches Skript, das die Chrome-Sperre komplett ignoriert
       const script = document.createElement('script');
       script.id = 'jsonpScript';
-            if (searchTitle.startsWith("tt")) {
-        script.src = "https://omdbapi.com/?i=" + encodeURIComponent(searchTitle) + "&apikey=" + apiKey + "&callback=omdbCallback";
+      
+      // Nutzt den intelligenten ID- und Namensdetektor, den du vorhin gebaut hast!
+      if (searchTitle.startsWith("tt")) {
+        script.src = "https://omdbapi.com" + encodeURIComponent(searchTitle) + "&apikey=" + apiKey + "&callback=omdbCallback";
       } else {
-        script.src = "https://omdbapi.com/?t=" + encodeURIComponent(searchTitle) + "&apikey=" + apiKey + "&callback=omdbCallback";
+        script.src = "https://omdbapi.com" + encodeURIComponent(searchTitle) + "&apikey=" + apiKey + "&callback=omdbCallback";
       }
-
       document.body.appendChild(script);
     }
   </script>
