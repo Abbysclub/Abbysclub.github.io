@@ -45,7 +45,8 @@
         mainContainer.appendChild(sawCard);
       }
       neueFilme.forEach(film => {
-        if (film.index === "S" && film.name !== "Saw" && film.name !== "SAW X") {
+        if (film.index === "S" && film.name !== "Saw" && film.name !== "SAW X" && film.name !== "Supergirl") {
+
           hatTreffer = true;
           emptyMessage.style.display = "none";
           const card = document.createElement('div');
