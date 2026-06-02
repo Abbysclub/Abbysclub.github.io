@@ -26,8 +26,6 @@
     <div class="bot-log" id="botLogBox"></div>
   </div>
   <script>
-    const pin = prompt("[SECURITY] Admin-Pin eingeben:");
-    if (pin === "1994" || pin === "abby") { document.body.style.display = "block"; } else { alert("Zugriff verweigert!"); window.location.href = "wiki_darstellerinnen.html"; }
     
     function botLiveAbruf() {
       const searchTitle = document.getElementById('starName').value.trim();
