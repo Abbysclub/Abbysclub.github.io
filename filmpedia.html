@@ -23,17 +23,26 @@
     .subtitle { color: #aaa; font-size: 18px; font-style: italic; margin-bottom: 30px; }
     .info-text { color: #666; font-size: 14px; margin-bottom: 50px; }
     
-    /* NEUER MEDIEN-BEREICH */
     .news-section { width: 100%; max-width: 850px; margin: auto; text-align: left; }
     .news-section h2 { color: #ff0000; border-bottom: 2px solid #333; padding-bottom: 10px; text-transform: uppercase; font-size: 22px; margin-bottom: 25px; }
+    
+    /* INTERNET-MEDIEN BOXEN */
     .entry-card { background: #1f1f1f; border-left: 5px solid #ff0000; border-radius: 6px; padding: 25px; margin-bottom: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.6); display: flex; gap: 20px; align-items: center; }
     .entry-content { flex: 1; }
     .entry-header { display: flex; justify-content: space-between; color: #888; font-size: 11px; margin-bottom: 10px; font-weight: bold; text-transform: uppercase; }
     .entry-title { font-size: 22px; color: #fff; margin: 0 0 12px 0; text-transform: uppercase; letter-spacing: 0.5px; }
     .entry-body { color: #ccc; line-height: 1.6; font-size: 15px; margin-bottom: 15px; }
-    .media-placeholder { width: 140px; height: 200px; background: #262626; border: 2px dashed #ff0000; border-radius: 4px; display: flex; align-items: center; justify-content: center; color: #666; font-size: 12px; font-weight: bold; text-align: center; text-transform: uppercase; padding: 10px; box-sizing: border-box; }
-    .trailer-btn { display: inline-block; background: #e50914; color: white; text-decoration: none; padding: 8px 16px; border-radius: 4px; font-weight: bold; font-size: 13px; text-transform: uppercase; }
-    .trailer-btn:hover { background: #b80710; }
+    .trailer-btn { display: inline-block; padding: 8px 16px; border-radius: 4px; font-weight: bold; font-size: 13px; text-transform: uppercase; text-decoration: none; color: white; }
+    
+    /* FARBCODES FÜR DIE ABTEILUNGEN */
+    .border-filme { border-left-color: #ff0000; }
+    .btn-filme-go { background: #ff0000; }
+    .border-serien { border-left-color: #ffc107; }
+    .btn-serien-go { background: #ffc107; color: black; }
+    .border-musik { border-left-color: #17a2b8; }
+    .btn-musik-go { background: #17a2b8; }
+    .border-gaming { border-left-color: #28a745; }
+    .btn-gaming-go { background: #28a745; }
     
     footer { color: #555; font-size: 13px; margin-top: 80px; border-top: 1px solid #222; padding-top: 20px; }
     footer strong { color: #aaa; }
@@ -60,41 +69,59 @@
     <div class="subtitle">Unzensiert &amp; Uncut – Dein Film- und Serien-Newsmagazin</div>
     <div class="info-text">Das unzensierte Medien-Imperium von Gründer Daniel.H läuft fehlerfrei im weltweiten Netz.</div>
 
-    <!-- HIER STEHEN JETZT DIE MEDIEN-EINTRÄGE -->
     <div class="news-section">
-      <h2>📋 Aktuelle Medien-Einträge &amp; Highlights</h2>
+      <h2>📋 AKTUELLE MEDIEN-EINTRÄGE &amp; HIGHLIGHTS</h2>
       
-      <!-- Medien-Eintrag 1: Hostel -->
-      <div class="entry-card">
+      <!-- 1. ABTEILUNG: FILME -->
+      <div class="entry-card border-filme">
         <div class="entry-content">
-          <div class="entry-header">
-            <span>Kategorie: Uncut-Highlight</span>
-            <span>Update: 02. Juni 2026</span>
-          </div>
-          <h3 class="entry-title">Hostel (2005) – Live synchronisiert</h3>
+          <div class="entry-header"><span>Kategorie: Uncut-Filmarchiv</span><span>Status: Aktiv</span></div>
+          <h3 class="entry-title">Unzensierte Filme-Datenbank</h3>
           <p class="entry-body">
-            Der bahnbrechende Gore-Schocker von Eli Roth wurde erfolgreich über das neue JSONP-Bot-System ins Wiki geladen. Die unzensierten Inhaltsangaben und Crew-Details stehen ab sofort im H-Register bereit.
+            Hier findest du alle live synchronisierten Kinofilme, unzensierten Handlungen und originalen IMDb-Cover von Highlights wie Hostel, Saw X und Supergirl.
           </p>
-          <a href="wiki_filme.html" class="trailer-btn">Zum H-Register →</a>
+          <a href="wiki_filme.html" class="trailer-btn btn-filme-go">Zu den Filmen →</a>
         </div>
-        <!-- Das Bild wird vollautomatisch von IMDb geladen, ohne dass du ein Foto hochladen musst! -->
-        <img src="https://media-amazon.com" class="wiki-image" style="width:140px; height:200px; object-fit:cover; border:2px solid #ff0000; border-radius:4px;" onerror="this.style.display='none';">
+        <img src="https://media-amazon.com" style="width:130px; height:180px; object-fit:cover; border-radius:4px; border: 1px solid #333;">
       </div>
 
-      <!-- Medien-Eintrag 2: Supergirl -->
-      <div class="entry-card">
+      <!-- 2. ABTEILUNG: SERIEN -->
+      <div class="entry-card border-serien">
         <div class="entry-content">
-          <div class="entry-header">
-            <span>Kategorie: Kino-News (2026)</span>
-            <span>Status: Neu im System</span>
-          </div>
-          <h3 class="entry-title">Supergirl (2026) – Der ID-Sync steht</h3>
+          <div class="entry-header"><span>Kategorie: Serienpedia</span><span>Status: Bereit</span></div>
+          <h3 class="entry-title">Serien- &amp; Staffel-Archiv</h3>
           <p class="entry-body">
-            Dank des brandneuen, unblockierbaren tt-ID-Detektors wurde das mit Spannung erwartete DC-Meisterwerk mit Milly Alcock im System verankert. Keine doppelten Einträge, keine Datenfehler.
+            Die Zentrale für alle TV-Projekte, unzensierten Episoden-Guides und Streaming-Highlights. Bereit für die Anbindung an den automatischen Serien-Bot.
           </p>
-          <a href="wiki_filme.html" class="trailer-btn">Zum S-Register →</a>
+          <a href="wiki_serien.html" class="trailer-btn btn-serien-go">Zur Serienpedia →</a>
         </div>
-        <img src="https://media-amazon.com" class="wiki-image" style="width:140px; height:200px; object-fit:cover; border:2px solid #ff0000; border-radius:4px;" onerror="this.style.display='none';">
+        <img src="https://unsplash.com" style="width:130px; height:180px; object-fit:cover; border-radius:4px; border: 1px solid #333;">
+      </div>
+
+      <!-- 3. ABTEILUNG: MUSIK -->
+      <div class="entry-card border-musik">
+        <div class="entry-content">
+          <div class="entry-header"><span>Kategorie: Musikpedia</span><span>Status: Bereit</span></div>
+          <h3 class="entry-title">SoundCloud &amp; Track-Archiv</h3>
+          <p class="entry-body">
+            Dein unzensiertes Musikarchiv für Alben, Tracklisten und Künstler-Profile. Optimal vorbereitet für die Integration von Live-Playlists.
+          </p>
+          <a href="wiki_musik.html" class="trailer-btn btn-musik-go">Zur Musikpedia →</a>
+        </div>
+        <img src="https://unsplash.com" style="width:130px; height:180px; object-fit:cover; border-radius:4px; border: 1px solid #333;">
+      </div>
+
+      <!-- 4. ABTEILUNG: GAMING -->
+      <div class="entry-card border-gaming">
+        <div class="entry-content">
+          <div class="entry-header"><span>Kategorie: Gamingpedia</span><span>Status: Bereit</span></div>
+          <h3 class="entry-title">Spiele- &amp; Uncut-Gaming-Archiv</h3>
+          <p class="entry-body">
+            Die Datenbank für Games, Plattformen und unzensierte Mod-Updates. Bringe deine Gaming-Highlights direkt auf den Bildschirm.
+          </p>
+          <a href="wiki_gaming.html" class="trailer-btn btn-gaming-go">Zur Gamingpedia →</a>
+        </div>
+        <img src="https://unsplash.com" style="width:130px; height:180px; object-fit:cover; border-radius:4px; border: 1px solid #333;">
       </div>
 
     </div>
