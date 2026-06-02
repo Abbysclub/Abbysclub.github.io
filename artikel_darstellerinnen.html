@@ -52,8 +52,7 @@
     </div>
   </div>
   <script>
-    const pin = prompt("[SECURITY] Admin-Pin eingeben:");
-    if (pin === "1994" || pin === "abby") { document.body.style.display = "block"; } else { alert("Zugriff verweigert!"); window.location.href = "wiki_darstellerinnen.html"; }
+    document.body.style.display = "block";
     function botLiveAbruf() {
       const searchTitle = document.getElementById('starName').value.trim();
       const inputUncut = document.getElementById('customUncut').value.trim();
