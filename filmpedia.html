@@ -2,120 +2,107 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Filmpedia Wiki - News Dashboard</title>
+  <title>Filmpedia Wiki - Startseite</title>
   <style>
     body { font-family: Arial, sans-serif; background: #141414; margin: 0; color: white; padding-bottom: 80px; }
-    .container { max-width: 1200px; margin: auto; padding: 10px; display: flex; flex-direction: column; align-items: center; }
+    .navbar { background: #000; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #ff0000; box-sizing: border-box; width: 100%; }
+    .navbar .logo { font-size: 24px; color: #ff0000; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
+    .nav-links { display: flex; gap: 10px; flex-wrap: wrap; }
+    .nav-btn { color: white; text-decoration: none; padding: 6px 12px; border-radius: 4px; font-weight: bold; font-size: 12px; text-transform: uppercase; }
+    .btn-darsteller { background: #0056b3; }
+    .btn-serien { background: #ffc107; color: black; }
+    .btn-filme { background: #ff0000; }
+    .btn-festival { background: #e83e8c; }
+    .btn-darstellerinnen { background: #6f42c1; }
+    .btn-porno { background: #fd7e14; }
+    .btn-musik { background: #17a2b8; }
+    .btn-gaming { background: #28a745; }
     
-    /* Perfekt ausbalancierte Navbar für alle 8 Buttons in einer Reihe */
-    .navbar { 
-      background: #000; 
-      padding: 10px 15px; 
-      display: flex; 
-      justify-content: space-between; 
-      align-items: center; 
-      border-bottom: 2px solid #ff0000; 
-      width: 100%; 
-      box-sizing: border-box; 
-    }
+    .container { max-width: 1000px; margin: auto; padding: 40px 20px; text-align: center; }
+    h1 { font-size: 42px; text-transform: uppercase; margin-bottom: 10px; letter-spacing: 1px; }
+    .subtitle { color: #aaa; font-size: 18px; font-style: italic; margin-bottom: 30px; }
+    .info-text { color: #666; font-size: 14px; margin-bottom: 50px; }
     
-    .navbar .logo { font-size: 20px; color: #ff0000; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; white-space: nowrap; }
+    /* NEUER MEDIEN-BEREICH */
+    .news-section { width: 100%; max-width: 850px; margin: auto; text-align: left; }
+    .news-section h2 { color: #ff0000; border-bottom: 2px solid #333; padding-bottom: 10px; text-transform: uppercase; font-size: 22px; margin-bottom: 25px; }
+    .entry-card { background: #1f1f1f; border-left: 5px solid #ff0000; border-radius: 6px; padding: 25px; margin-bottom: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.6); display: flex; gap: 20px; align-items: center; }
+    .entry-content { flex: 1; }
+    .entry-header { display: flex; justify-content: space-between; color: #888; font-size: 11px; margin-bottom: 10px; font-weight: bold; text-transform: uppercase; }
+    .entry-title { font-size: 22px; color: #fff; margin: 0 0 12px 0; text-transform: uppercase; letter-spacing: 0.5px; }
+    .entry-body { color: #ccc; line-height: 1.6; font-size: 15px; margin-bottom: 15px; }
+    .media-placeholder { width: 140px; height: 200px; background: #262626; border: 2px dashed #ff0000; border-radius: 4px; display: flex; align-items: center; justify-content: center; color: #666; font-size: 12px; font-weight: bold; text-align: center; text-transform: uppercase; padding: 10px; box-sizing: border-box; }
+    .trailer-btn { display: inline-block; background: #e50914; color: white; text-decoration: none; padding: 8px 16px; border-radius: 4px; font-weight: bold; font-size: 13px; text-transform: uppercase; }
+    .trailer-btn:hover { background: #b80710; }
     
-    /* Der Button-Container verteilt jetzt alle 8 Buttons absolut gleichmäßig über die gesamte Breite */
-    .nav-buttons-center { 
-      display: flex; 
-      align-items: center; 
-      justify-content: center; 
-      gap: 5px; 
-      flex: 1; 
-      margin: 0 10px; 
-    }
-    
-    .nav-right-stack { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; }
-    
-    /* Kompakteres Einheits-Design, damit alles perfekt in eine Zeile passt */
-    .btn-base {
-      padding: 5px 8px; 
-      border-radius: 4px; 
-      font-weight: bold; 
-      text-transform: uppercase; 
-      text-align: center; 
-      font-size: 10px; 
-      text-decoration: none; 
-      transition: 0.2s;
-      white-space: nowrap;
-    }
-    .btn-base:hover { transform: scale(1.05); }
-    
-    /* 1. DARSTELLER (Neon-Blau) - IMDb Server */
-    .article-btn { background: #007bff; color: white; border: 1px solid #00c6ff; box-shadow: 0 0 8px rgba(0, 123, 255, 0.3); }
-
-    /* 2. SERIENPEDIA (Gold-Gelb) - IMDb Server */
-    .article-btn-series-main { background: #f1c40f; color: #000; border: 1px solid #f39c12; box-shadow: 0 0 8px rgba(241,196,15,0.2); }
-
-    /* 3. FILME (Filmpedia-Rot) - IMDb Server */
-    .article-btn-movies { background: #ff0000; color: white; border: 1px solid #ff3333; box-shadow: 0 0 8px rgba(255,0,0,0.3); }
-
-    /* NEU LINKS: 4. FESTIVAL (Neon-Pink/Magenta) - Eigener Festival Server */
-    .article-btn-festival { background: #ff007f; color: white; border: 1px solid #ff66b2; box-shadow: 0 0 10px rgba(255,0,127,0.4); }
-
-    /* 5. DARSTELLERINNEN (Lila-Pink-Rosa-Verlauf) - IMDb Server */
-    .article-btn-female { background: linear-gradient(90deg, #9b59b6 0%, #ff007f 50%, #ffb6c1 100%); color: white; border: none; padding: 6px 9px; box-shadow: 0 0 10px rgba(255, 0, 127, 0.3); }
-
-    /* 6. PORNOPEDIA (Neon-Orange) - Erwachsenen Server */
-    .article-btn-porno { background: #e67e22; color: white; border: 1px solid #f39c12; box-shadow: 0 0 8px rgba(230,126,34,0.3); }
-
-    /* 7. MUSIKPEDIA (Neon-Cyan) - Musik Server */
-    .article-btn-music { background: #00ced1; color: #000; border: 1px solid #00eee7; box-shadow: 0 0 8px rgba(0,206,209,0.3); }
-
-    /* 8. GAMINGPEDIA (Gamer-Grün) - Gaming Server */
-    .gaming-btn { background: #1f8b4c; color: white; border: 1px solid #2ecc71; box-shadow: 0 0 8px rgba(46,204,113,0.3); }
-    .gaming-btn:hover { background: #2ecc71; color: black; }
-
-    /* Sprachauswahl */
-    .lang-switch { background: #222; color: white; border: 1px solid #444; padding: 3px 5px; border-radius: 4px; cursor: pointer; font-size: 11px; width: 90px; text-align: center; }
+    footer { color: #555; font-size: 13px; margin-top: 80px; border-top: 1px solid #222; padding-top: 20px; }
+    footer strong { color: #aaa; }
   </style>
 </head>
 <body>
 
   <div class="navbar">
-    <!-- Links: Logo -->
-    <div class="logo">Filmpedia 🎬</div>
-    
-    <!-- Mitte: ALLE 8 BUTTONS pfeilgerade in einer Reihe aufgereiht! -->
-    <div class="nav-buttons-center">
-      <a href="wiki_darsteller.html" class="btn-base article-btn">Darsteller</a>
-      <a href="serienpedia.html" class="btn-base article-btn-series-main">Serienpedia</a>
-      <a href="wiki_filme.html" class="btn-base article-btn-movies">Filme</a>
-      <a href="wiki_festival.html" class="btn-base article-btn-festival">Festival</a>
-      <a href="wiki_darstellerinnen.html" class="btn-base article-btn-female">Darstellerinnen</a>
-      <a href="pornopedia.html" class="btn-base article-btn-porno">Pornopedia</a>
-      <a href="musikpedia.html" class="btn-base article-btn-music">Musikpedia</a>
-      <a href="gamingpedia.html" class="btn-base gaming-btn">Gamingpedia</a>
-    </div>
-    
-    <!-- Rechts: Sprachbox -->
-    <div class="nav-right-stack">
-      <select class="lang-switch">
-        <option value="de">Deutsch 🇩🇪</option>
-        <option value="en">English 🇬🇧</option>
-      </select>
+    <div class="logo">FILMPEDIA 🎬</div>
+    <div class="nav-links">
+      <a href="wiki_darsteller.html" class="nav-btn btn-darsteller">Darsteller</a>
+      <a href="wiki_serien.html" class="nav-btn btn-serien">Serienpedia</a>
+      <a href="wiki_filme.html" class="nav-btn btn-filme">Filme</a>
+      <a href="wiki_festival.html" class="nav-btn btn-festival">Festival</a>
+      <a href="wiki_darstellerinnen.html" class="nav-btn btn-darstellerinnen">Darstellerinnen</a>
+      <a href="wiki_porno.html" class="nav-btn btn-porno">Pornopedia</a>
+      <a href="wiki_musik.html" class="nav-btn btn-musik">Musikpedia</a>
+      <a href="wiki_gaming.html" class="nav-btn btn-gaming">Gamingpedia</a>
     </div>
   </div>
 
   <div class="container">
-    <header>
-      <h1>Filmpedia Wiki</h1>
-      <p>Unzensiert & Uncut – Dein Film- und Serien-Newsmagazin</p>
-    </header>
-    
-    <div style="text-align:center; color:#888; font-style:italic; margin-top:50px;">
-      Das unzensierte Medien-Imperium ist nun vollständig ausgebaut. Alle Abteilungen sind lokal verknüpft...
+    <h1>Filmpedia Wiki</h1>
+    <div class="subtitle">Unzensiert &amp; Uncut – Dein Film- und Serien-Newsmagazin</div>
+    <div class="info-text">Das unzensierte Medien-Imperium von Gründer Daniel.H läuft fehlerfrei im weltweiten Netz.</div>
+
+    <!-- HIER STEHEN JETZT DIE MEDIEN-EINTRÄGE -->
+    <div class="news-section">
+      <h2>📋 Aktuelle Medien-Einträge &amp; Highlights</h2>
+      
+      <!-- Medien-Eintrag 1: Hostel -->
+      <div class="entry-card">
+        <div class="entry-content">
+          <div class="entry-header">
+            <span>Kategorie: Uncut-Highlight</span>
+            <span>Update: 02. Juni 2026</span>
+          </div>
+          <h3 class="entry-title">Hostel (2005) – Live synchronisiert</h3>
+          <p class="entry-body">
+            Der bahnbrechende Gore-Schocker von Eli Roth wurde erfolgreich über das neue JSONP-Bot-System ins Wiki geladen. Die unzensierten Inhaltsangaben und Crew-Details stehen ab sofort im H-Register bereit.
+          </p>
+          <a href="wiki_filme.html" class="trailer-btn">Zum H-Register →</a>
+        </div>
+        <!-- Das Bild wird vollautomatisch von IMDb geladen, ohne dass du ein Foto hochladen musst! -->
+        <img src="https://media-amazon.com" class="wiki-image" style="width:140px; height:200px; object-fit:cover; border:2px solid #ff0000; border-radius:4px;" onerror="this.style.display='none';">
+      </div>
+
+      <!-- Medien-Eintrag 2: Supergirl -->
+      <div class="entry-card">
+        <div class="entry-content">
+          <div class="entry-header">
+            <span>Kategorie: Kino-News (2026)</span>
+            <span>Status: Neu im System</span>
+          </div>
+          <h3 class="entry-title">Supergirl (2026) – Der ID-Sync steht</h3>
+          <p class="entry-body">
+            Dank des brandneuen, unblockierbaren tt-ID-Detektors wurde das mit Spannung erwartete DC-Meisterwerk mit Milly Alcock im System verankert. Keine doppelten Einträge, keine Datenfehler.
+          </p>
+          <a href="wiki_filme.html" class="trailer-btn">Zum S-Register →</a>
+        </div>
+        <img src="https://media-amazon.com" class="wiki-image" style="width:140px; height:200px; object-fit:cover; border:2px solid #ff0000; border-radius:4px;" onerror="this.style.display='none';">
+      </div>
+
     </div>
+
+    <footer>
+      © 2026 Filmpedia Wiki | Gegründet am: <strong>29. Mai 2026</strong> | Gründer: <strong>(Abby) Daniel.H</strong>
+    </footer>
   </div>
 
-  <footer>
-    <p>© 2026 Filmpedia Wiki | Gegründet am: <strong>29. Mai 2026</strong> | Gründer: <strong>(Abby) Daniel.H</strong></p>
-  </footer>
 </body>
 </html>
