@@ -2,135 +2,73 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Filmpedia Wiki - Startseite</title>
+  <title>Filmpedia Wiki - Darstellerinnen</title>
   <style>
     body { font-family: Arial, sans-serif; background: #141414; margin: 0; color: white; padding-bottom: 80px; }
-    .navbar { background: #000; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #ff0000; box-sizing: border-box; width: 100%; }
-    .navbar .logo { font-size: 24px; color: #ff0000; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
-    .nav-links { display: flex; gap: 10px; flex-wrap: wrap; }
-    .nav-btn { color: white; text-decoration: none; padding: 6px 12px; border-radius: 4px; font-weight: bold; font-size: 12px; text-transform: uppercase; }
-    .btn-darsteller { background: #0056b3; }
-    .btn-serien { background: #ffc107; color: black; }
-    .btn-filme { background: #ff0000; }
-    .btn-festival { background: #e83e8c; }
-    .btn-darstellerinnen { background: #6f42c1; }
-    .btn-porno { background: #fd7e14; }
-    .btn-musik { background: #17a2b8; }
-    .btn-gaming { background: #28a745; }
-    
+    .navbar { background: #000; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #6f42c1; box-sizing: border-box; width: 100%; }
+    .navbar .logo { font-size: 24px; color: #6f42c1; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
+    .back-btn { background: #222; color: white; border: 1px solid #444; padding: 6px 12px; border-radius: 5px; font-weight: bold; text-decoration: none; font-size: 13px; text-transform: uppercase; }
+    .back-btn:hover { background: #6f42c1; }
     .container { max-width: 1000px; margin: auto; padding: 40px 20px; text-align: center; }
-    h1 { font-size: 42px; text-transform: uppercase; margin-bottom: 10px; letter-spacing: 1px; }
-    .subtitle { color: #aaa; font-size: 18px; font-style: italic; margin-bottom: 30px; }
-    .info-text { color: #666; font-size: 14px; margin-bottom: 50px; }
-    
-    .news-section { width: 100%; max-width: 850px; margin: auto; text-align: left; }
-    .news-section h2 { color: #ff0000; border-bottom: 2px solid #333; padding-bottom: 10px; text-transform: uppercase; font-size: 22px; margin-bottom: 25px; }
-    
-    .entry-card { background: #1f1f1f; border-left: 5px solid #ff0000; border-radius: 6px; padding: 25px; margin-bottom: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.6); display: flex; gap: 20px; align-items: center; justify-content: space-between; }
-    .entry-content { flex: 1; }
-    .entry-header { display: flex; justify-content: space-between; color: #888; font-size: 11px; margin-bottom: 10px; font-weight: bold; text-transform: uppercase; }
-    .entry-title { font-size: 22px; color: #fff; margin: 0 0 12px 0; text-transform: uppercase; letter-spacing: 0.5px; }
-    .entry-body { color: #ccc; line-height: 1.6; font-size: 15px; margin-bottom: 15px; }
-    .trailer-btn { display: inline-block; padding: 8px 16px; border-radius: 4px; font-weight: bold; font-size: 13px; text-transform: uppercase; text-decoration: none; color: white; }
-    .movie-poster-preview { width: 130px; height: 180px; object-fit: cover; border-radius: 4px; border: 2px solid #333; background: #222; }
-    
-    .border-filme { border-left-color: #ff0000; }
-    .btn-filme-go { background: #ff0000; }
-    .border-serien { border-left-color: #ffc107; }
-    .btn-serien-go { background: #ffc107; color: black; }
-    .border-musik { border-left-color: #17a2b8; }
-    .btn-musik-go { background: #17a2b8; }
-    .border-gaming { border-left-color: #28a745; }
-    .btn-gaming-go { background: #28a745; }
-    
-    footer { color: #555; font-size: 13px; margin-top: 80px; border-top: 1px solid #222; padding-top: 20px; }
+    h1 { font-size: 36px; text-transform: uppercase; margin-bottom: 10px; color: #6f42c1; }
+    .subtitle { color: #aaa; font-size: 16px; margin-bottom: 40px; }
+    .abc-container { display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; max-width: 800px; margin: auto; margin-bottom: 50px; }
+    .abc-btn { display: inline-block; width: 50px; height: 50px; background: #1f1f1f; color: white; text-decoration: none; line-height: 50px; font-size: 20px; font-weight: bold; border-radius: 6px; border: 1px solid #333; transition: all 0.2s; }
+    .abc-btn:hover { background: #6f42c1; border-color: #6f42c1; transform: scale(1.1); }
+    .bot-link-box { background: #1f1f1f; border: 1px dashed #6f42c1; padding: 20px; border-radius: 8px; max-width: 500px; margin: auto; }
+    .bot-btn { display: inline-block; background: #6f42c1; color: white; text-decoration: none; padding: 10px 20px; border-radius: 4px; font-weight: bold; text-transform: uppercase; margin-top: 10px; }
+    .bot-btn:hover { background: #5a32a3; }
   </style>
 </head>
 <body>
 
   <div class="navbar">
-    <div class="logo">FILMPEDIA 🎬</div>
-    <div class="nav-links">
-      <a href="wiki_darsteller.html" class="nav-btn btn-darsteller">Darsteller</a>
-      <a href="wiki_serien.html" class="nav-btn btn-serien">Serienpedia</a>
-      <a href="wiki_filme.html" class="nav-btn btn-filme">Filme</a>
-      <a href="wiki_festival.html" class="nav-btn btn-festival">Festival</a>
-      <a href="wiki_darstellerinnen.html" class="nav-btn btn-darstellerinnen">Darstellerinnen</a>
-      <a href="wiki_porno.html" class="nav-btn btn-porno">Pornopedia</a>
-      <a href="wiki_musik.html" class="nav-btn btn-musik">Musikpedia</a>
-      <a href="wiki_gaming.html" class="nav-btn btn-gaming">Gamingpedia</a>
-    </div>
+    <div class="logo">Darstellerinnen 💜</div>
+    <a href="filmpedia.html" class="back-btn">← Zur Startseite</a>
   </div>
 
   <div class="container">
-    <h1>Filmpedia Wiki</h1>
-    <div class="subtitle">Unzensiert &amp; Uncut – Dein Film- und Serien-Newsmagazin</div>
-    <div class="info-text">Das unzensierte Medien-Imperium von Gründer Daniel.H läuft fehlerfrei im weltweiten Netz.</div>
+    <h1>Darstellerinnen-Zentrale</h1>
+    <div class="subtitle">Wähle einen Anfangsbuchstaben des bürgerlichen Nachnamens oder Künstlernamens</div>
 
-    <div class="news-section">
-      <h2>📋 AKTUELLE MEDIEN-EINTRÄGE &amp; HIGHLIGHTS</h2>
-      
-      <!-- 1. FILME -->
-      <div class="entry-card border-filme">
-        <div class="entry-content">
-          <div class="entry-header"><span>Kategorie: Uncut-Filmarchiv</span><span>Status: Aktiv</span></div>
-          <h3 class="entry-title">Unzensierte Filme-Datenbank</h3>
-          <p class="entry-body">
-            Hier findest du alle live synchronisierten Kinofilme, unzensierten Handlungen und originalen IMDb-Cover von Highlights wie Hostel, Saw X und Supergirl.
-          </p>
-          <a href="wiki_filme.html" class="trailer-btn btn-filme-go">Zu den Filmen →</a>
-        </div>
-        <!-- Greift auf dein internet-sicheres Saw X Cover auf deinem Server zu! -->
-        <img class="movie-poster-preview" src="Saw%20X.jpg" alt="Filme Overview">
-      </div>
-
-      <!-- 2. SERIEN -->
-      <div class="entry-card border-serien">
-        <div class="entry-content">
-          <div class="entry-header"><span>Kategorie: Serienpedia</span><span>Status: Bereit</span></div>
-          <h3 class="entry-title">Serien- &amp; Staffel-Archiv</h3>
-          <p class="entry-body">
-            Die Zentrale für alle TV-Projekte, unzensierten Episoden-Guides und Streaming-Highlights. Bereit für die Anbindung an den automatischen Serien-Bot.
-          </p>
-          <a href="wiki_serien.html" class="trailer-btn btn-serien-go">Zur Serienpedia →</a>
-        </div>
-        <!-- Nutzen wir Supergirl als geniales Aushängeschild, da die Datei sicher hochgeladen ist! -->
-        <img class="movie-poster-preview" src="Supergirl.jpg" alt="Serien Overview">
-      </div>
-
-      <!-- 3. MUSIK -->
-      <div class="entry-card border-musik">
-        <div class="entry-content">
-          <div class="entry-header"><span>Kategorie: Musikpedia</span><span>Status: Bereit</span></div>
-          <h3 class="entry-title">SoundCloud &amp; Track-Archiv</h3>
-          <p class="entry-body">
-            Dein unzensiertes Musikarchiv für Alben, Tracklisten und Künstler-Profile. Optimal vorbereitet für die Integration von Live-Playlists.
-          </p>
-          <a href="wiki_musik.html" class="trailer-btn btn-musik-go">Zur Musikpedia →</a>
-        </div>
-        <!-- Schutz-Fallback: Falls kein Musikbild da ist, nimmt er ein sicheres internes Bild -->
-        <img class="movie-poster-preview" src="Saw%20X.jpg" style="filter: hue-rotate(180deg);" alt="Musik Overview">
-      </div>
-
-      <!-- 4. GAMING -->
-      <div class="entry-card border-gaming">
-        <div class="entry-content">
-          <div class="entry-header"><span>Kategorie: Gamingpedia</span><span>Status: Bereit</span></div>
-          <h3 class="entry-title">Spiele- &amp; Uncut-Gaming-Archiv</h3>
-          <p class="entry-body">
-            Die Datenbank für Games, Plattformen und unzensierte Mod-Updates. Bringe deine Gaming-Highlights direkt auf den Bildschirm.
-          </p>
-          <a href="wiki_gaming.html" class="trailer-btn btn-gaming-go">Zur Gamingpedia →</a>
-        </div>
-        <img class="movie-poster-preview" src="Supergirl.jpg" style="filter: hue-rotate(90deg);" alt="Gaming Overview">
-      </div>
-
+    <!-- HIER SIND ALL DEINE KNÖPFE WIEDER DA -->
+    <div class="abc-container">
+      <a href="darsteller_a.html" class="abc-btn">A</a>
+      <a href="darsteller_b.html" class="abc-btn">B</a>
+      <a href="darsteller_c.html" class="abc-btn">C</a>
+      <a href="darsteller_d.html" class="abc-btn">D</a>
+      <a href="darsteller_e.html" class="abc-btn">E</a>
+      <a href="darsteller_f.html" class="abc-btn">F</a>
+      <a href="darsteller_g.html" class="abc-btn">G</a>
+      <a href="darsteller_h.html" class="abc-btn">H</a>
+      <a href="darsteller_i.html" class="abc-btn">I</a>
+      <a href="darsteller_j.html" class="abc-btn">J</a>
+      <a href="darsteller_k.html" class="abc-btn">K</a>
+      <a href="darsteller_l.html" class="abc-btn">L</a>
+      <a href="darsteller_m.html" class="abc-btn">M</a>
+      <a href="darsteller_n.html" class="abc-btn">N</a>
+      <a href="darsteller_o.html" class="abc-btn">O</a>
+      <a href="darsteller_p.html" class="abc-btn">P</a>
+      <a href="darsteller_q.html" class="abc-btn">Q</a>
+      <a href="darsteller_r.html" class="abc-btn">R</a>
+      <a href="darsteller_s.html" class="abc-btn">S</a>
+      <a href="darsteller_t.html" class="abc-btn">T</a>
+      <a href="darsteller_u.html" class="abc-btn">U</a>
+      <a href="darsteller_v.html" class="abc-btn">V</a>
+      <a href="darsteller_w.html" class="abc-btn">W</a>
+      <a href="darsteller_x.html" class="abc-btn">X</a>
+      <a href="darsteller_y.html" class="abc-btn">Y</a>
+      <a href="darsteller_z.html" class="abc-btn">Z</a>
     </div>
 
-    <footer>
-      © 2026 Filmpedia Wiki | Gegründet am: <strong>29. Mai 2026</strong> | Gründer: <strong>(Abby) Daniel.H</strong>
-    </footer>
+    <!-- DIE SAUBERE VERKNÜPFUNG ZUM REPARIERTEN BOT -->
+    <div class="bot-link-box">
+      <div style="font-weight: bold; color: #6f42c1; text-transform: uppercase; font-size: 14px; margin-bottom: 5px;">Schaltzentrale</div>
+      <p style="margin: 0; color: #aaa; font-size: 14px;">Neue Darstellerin live über IMDb-ID oder Namen synchronisieren.</p>
+      <a href="artikel_darstellerin.html" class="bot-btn">Star-Bot aufrufen →</a>
+    </div>
   </div>
 
 </body>
 </html>
+
