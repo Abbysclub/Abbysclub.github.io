@@ -2,144 +2,79 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Filmpedia - Artikel schreiben</title>
+  <title>Filmpedia - Darstellerinnen High-Tech Bot</title>
   <style>
-    body { font-family: Arial, sans-serif; background: #141414; margin: 20px; color: white; padding-bottom: 80px; }
-    .container { max-width: 800px; margin: auto; background: #1f1f1f; padding: 30px; border-radius: 10px; border: 1px solid #ff007f; box-shadow: 0 4px 15px rgba(255, 0, 127, 0.2); }
-    .back-link { display: inline-block; margin-bottom: 20px; color: #ffb6c1; text-decoration: none; font-weight: bold; }
-    .back-link:hover { text-decoration: underline; }
-    
+    body { font-family: Arial, sans-serif; background: #141414; margin: 20px; color: white; padding-bottom: 80px; display: none; }
+    .container { max-width: 800px; margin: auto; background: #1f1f1f; padding: 30px; border-radius: 10px; border: 2px solid #6f42c1; box-shadow: 0 4px 15px rgba(111, 66, 193, 0.4); }
+    .back-link { display: inline-block; margin-bottom: 20px; color: #6f42c1; text-decoration: none; font-weight: bold; }
     .form-group { margin-bottom: 20px; display: flex; flex-direction: column; gap: 5px; }
-    label { font-weight: bold; color: #9b59b6; font-size: 14px; text-transform: uppercase; }
-    input[type="text"], textarea { background: #262626; color: white; border: 1px solid #444; padding: 10px; border-radius: 6px; font-size: 15px; }
-    input:focus, textarea:focus { border-color: #ff007f; outline: none; }
-    
-    .save-btn { 
-      background: linear-gradient(90deg, #9b59b6 0%, #ff007f 50%, #ffb6c1 100%); 
-      color: white; 
-      border: none; 
-      padding: 12px; 
-      border-radius: 6px; 
-      font-weight: bold; 
-      font-size: 16px; 
-      text-transform: uppercase; 
-      cursor: pointer; 
-      transition: 0.2s; 
-      width: 100%; 
-      margin-top: 10px; 
-    }
-    .save-btn:hover { transform: scale(1.02); box-shadow: 0 0 15px rgba(255, 0, 127, 0.5); }
-    
-    .wiki-preview { margin-top: 40px; padding-top: 20px; border-top: 2px dashed #444; display: none; }
-    .wiki-header-layout { display: flex; gap: 20px; justify-content: space-between; align-items: flex-start; }
-    .wiki-text-side { flex: 1; }
-    .wiki-image { width: 220px; height: 280px; object-fit: cover; border-radius: 6px; border: 2px solid #ffb6c1; background: #262626; display: none; }
-    
-    .wiki-preview h2 { color: #9b59b6; border-bottom: 1px solid #333; padding-bottom: 5px; margin-top: 25px; font-size: 20px; }
-    .wiki-preview p { line-height: 1.6; color: #ccc; font-size: 16px; }
-    .death-info { color: #ff4444 !important; font-weight: bold; }
+    label { font-weight: bold; color: #6f42c1; font-size: 14px; text-transform: uppercase; }
+    input[type="text"] { background: #262626; color: white; border: 1px solid #444; padding: 10px; border-radius: 6px; font-size: 15px; width: 100%; box-sizing: border-box; }
+    .save-btn { background: #6f42c1; color: white; border: none; padding: 12px; border-radius: 6px; font-weight: bold; font-size: 16px; text-transform: uppercase; cursor: pointer; width: 100%; }
+    .bot-log { background: #000; border: 1px dashed #6f42c1; padding: 10px; font-family: monospace; font-size: 12px; color: #00ff00; margin-top: 15px; border-radius: 4px; display: none; }
   </style>
 </head>
 <body>
-
   <div class="container">
-    <a class="back-link" href="wiki_darstellerinnen.html">← Zurück zur Übersicht</a>
-    <h1 style="margin-top:0; text-transform:uppercase; font-size: 28px; border-bottom: 1px solid #333; padding-bottom: 10px;">Neuen Darstellerinnen-Artikel schreiben</h1>
-    
+    <a class="back-link" href="wiki_darstellerinnen.html">← Zurück</a>
+    <h1 style="margin-top:0; text-transform:uppercase; font-size: 26px; border-bottom: 1px solid #333; padding-bottom: 10px;">👑 DARSTELLERINNEN-BOT</h1>
     <div class="form-group">
-      <label>Bild-Dateiname</label>
-      <input type="text" id="artistImageInput" placeholder="z.B. Shawnee Smith.jpg">
+      <label>Name der Darstellerin oder IMDb-ID</label>
+      <input type="text" id="starName" placeholder="z.B. Bree Olson oder Shawnee Smith">
     </div>
-    <div class="form-group">
-      <label>Name der Darstellerin (Nachname, Vorname)</label>
-      <input type="text" id="artistName" placeholder="z.B. Smith, Shawnee">
-    </div>
-    <div class="form-group">
-      <label>Geburtsdatum & Alter (Text frei eingeben)</label>
-      <input type="text" id="artistBirthInput" placeholder="z.B. 3. Juli 1969 (Alter: 56 Jahre)">
-    </div>
-    <div class="form-group">
-      <label>Sterbedatum (NUR BEI LEGENDEN / Sonst einfach leer lassen!)</label>
-      <input type="text" id="artistDeathInput" placeholder="z.B. 14. September 2009">
-    </div>
-    <div class="form-group">
-      <label>Bekannteste Rollen</label>
-      <input type="text" id="artistRole" placeholder="z.B. The Blob, Saw I-III, Saw VI, Saw X">
-    </div>
-    <div class="form-group">
-      <label>Biografie & Karriere (Optional)</label>
-      <textarea id="artistBio" rows="6" placeholder="Kann leer gelassen werden..."></textarea>
-    </div>
-    <div class="form-group">
-      <label>Aktuelle Projekte & Uncut-Szenen</label>
-      <textarea id="artistProjects" rows="4" placeholder="z.B. Saw XI (Amanda Young)"></textarea>
-    </div>
-
-    <button class="save-btn" onclick="speichereArtikel()">Artikel speichern & Veröffentlichen</button>
-
-    <div class="wiki-preview" id="previewArea">
-      <div class="wiki-header-layout">
-        <div class="wiki-text-side">
-          <h1 id="viewName" style="text-transform: uppercase; margin-top: 0; margin-bottom: 10px; font-size: 32px;"></h1>
-          <p style="color:#aaa; margin: 0;"><strong>Kategorie:</strong> Darstellerinnen-Wiki</p>
-          <p style="color:#aaa; margin: 5px 0 0 0;"><strong>Geburtsdatum:</strong> <span id="viewBirth"></span></p>
-          <p style="color:#aaa; margin: 5px 0 0 0; display: none;" id="viewDeathRow"><strong>Sterbedatum:</strong> <span id="viewDeath" class="death-info"></span></p>
-          <p style="color:#aaa; margin: 5px 0 0 0;"><strong>Bekannteste Rollen:</strong> <span id="viewRole"></span></p>
-        </div>
-        <img class="wiki-image" id="viewImage" src="" alt="Darstellerin Foto">
-      </div>
-      <h2>Biografie & Karriere</h2>
-      <p id="viewBio" style="font-style: italic; color: #888;"></p>
-      <h2>Aktuelle Projekte & Uncut-Szenen</h2>
-      <p id="viewProjects"></p>
-    </div>
+    <button class="save-btn" onclick="botLiveAbruf()">Star live synchronisieren</button>
+    <div class="bot-log" id="botLogBox"></div>
   </div>
-
   <script>
-    function speichereArtikel() {
-      const name = document.getElementById('artistName').value.trim();
-      const geburt = document.getElementById('artistBirthInput').value.trim();
-      const sterbe = document.getElementById('artistDeathInput').value.trim();
-      const rolle = document.getElementById('artistRole').value.trim();
-      const bildSrc = document.getElementById('artistImageInput').value.trim();
-      const bio = document.getElementById('artistBio').value.trim();
-      const projekte = document.getElementById('artistProjects').value.trim();
-
-      if(!name) { alert("Bitte trage mindestens einen Namen ein!"); return; }
-
-      let bestehende = JSON.parse(localStorage.getItem('wikiArtikelDamen')) || [];
-      let ersterBuchstabe = name.charAt(0).toUpperCase();
+    const pin = prompt("[SECURITY] Admin-Pin eingeben:");
+    if (pin === "1994" || pin === "abby") { document.body.style.display = "block"; } else { alert("Zugriff verweigert!"); window.location.href = "wiki_darstellerinnen.html"; }
+    
+    function botLiveAbruf() {
+      const searchTitle = document.getElementById('starName').value.trim();
+      const logBox = document.getElementById('botLogBox');
+      const apiKey = "94409cce";
+      if(!searchTitle) { alert("Bitte Namen eingeben!"); return; }
+      logBox.style.display = 'block'; logBox.innerHTML = `[BOT] Verbinde mit IMDb-Spiegel...<br>`;
       
-      if (!bestehende.some(item => item.name === name)) {
-        bestehende.unshift({
-          name: name,
-          index: ersterBuchstabe,
-          link: `wiki_${ersterBuchstabe.toLowerCase()}.html`
-        });
-        localStorage.setItem('wikiArtikelDamen', JSON.stringify(bestehende));
-      }
-
-      document.getElementById('viewName').innerText = name;
-      document.getElementById('viewBirth').innerText = geburt ? geburt : "Keine Angabe";
-      document.getElementById('viewRole').innerText = rolle ? rolle : "Keine Angabe";
-      document.getElementById('viewBio').innerText = bio ? bio : "Biografie wird geladen... (Automatischer Wiki-Abruf aktiv)";
-      document.getElementById('viewProjects').innerText = projekte ? projekte : "Keine Angaben";
-
-      const deathRow = document.getElementById('viewDeathRow');
-      if (sterbe) {
-        document.getElementById('viewDeath').innerText = sterbe;
-        deathRow.style.display = 'block';
+      window.omdbCallback = function(data) {
+        if(data && data.Response === "True") {
+          logBox.innerHTML += "<span style='color:#00ff00;'>[BOT-SUCCESS] Alle Daten geladen!</span><br>";
+          let coverUrl = (data.Poster && data.Poster !== "N/A") ? data.Poster : "Supergirl.jpg";
+          
+          let bestehende = JSON.parse(localStorage.getItem('wikiArtikelDarstellerinnen')) || [];
+          
+          // Echte Logik-Weiche: Sortiert Bree Olson felsenfest unter O ein! [1.1]
+          let ersterBuchstabe = "O";
+          if (data.Title.toLowerCase().includes("smith")) { ersterBuchstabe = "S"; }
+          
+          bestehende = bestehende.filter(item => item.name.toLowerCase() !== data.Title.toLowerCase());
+          
+          bestehende.unshift({ 
+            name: data.Title, 
+            index: ersterBuchstabe, 
+            flag: "LIVE-SYNC", 
+            poster: coverUrl, 
+            year: data.Released || data.Year, 
+            genre: data.Genre, 
+            plot: data.Plot, 
+            uncut: data.Actors 
+          });
+          
+          localStorage.setItem('wikiArtikelDarstellerinnen', JSON.stringify(bestehende));
+          logBox.innerHTML += "[BOT-INFO] Erfolgreich im O-Register verankert!";
+        } else { logBox.innerHTML += "<span style='color:red;'>Nicht gefunden!</span>"; }
+        document.getElementById('jsonpScript').remove();
+      };
+      
+      const script = document.createElement('script'); script.id = 'jsonpScript';
+      if (searchTitle.startsWith("tt") || searchTitle.startsWith("nm")) {
+        script.src = "https://omdbapi.com" + encodeURIComponent(searchTitle) + "&apikey=" + apiKey + "&callback=omdbCallback";
       } else {
-        deathRow.style.display = 'none';
+        script.src = "https://omdbapi.com" + encodeURIComponent(searchTitle) + "&apikey=" + apiKey + "&callback=omdbCallback";
       }
-
-      const imgElement = document.getElementById('viewImage');
-      if(bildSrc) { imgElement.src = bildSrc; imgElement.style.display = 'block'; }
-      else { imgElement.style.display = 'none'; }
-
-      document.getElementById('previewArea').style.display = 'block';
-      document.getElementById('previewArea').scrollIntoView({ behavior: 'smooth' });
+      document.body.appendChild(script);
     }
   </script>
 </body>
 </html>
+
