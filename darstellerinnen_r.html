@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Filmpedia Wiki - Darstellerinnen R</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #141414; margin: 0; color: white; padding-bottom: 80px; }
+    .container { max-width: 1000px; margin: auto; padding: 20px; display: flex; flex-direction: column; align-items: center; }
+    .navbar { background: #000; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #6f42c1; width: 100%; box-sizing: border-box; }
+    .back-btn { background: #222; color: white; border: 1px solid #444; padding: 6px 12px; border-radius: 5px; font-weight: bold; text-decoration: none; font-size: 13px; text-transform: uppercase; }
+    .back-btn:hover { background: #6f42c1; }
+    header { background: #000; padding: 20px; border-radius: 10px; margin-bottom: 30px; border: 1px solid #333; width: 100%; max-width: 850px; box-sizing: border-box; }
+    header h1 { margin: 0; color: #fff; font-size: 28px; text-transform: uppercase; }
+    .star-card { background: #1f1f1f; border: 1px solid #333; border-radius: 8px; padding: 25px; margin-bottom: 25px; width: 100%; max-width: 850px; box-sizing: border-box; display: flex; gap: 30px; justify-content: space-between; }
+    .star-details { flex: 1; }
+    .star-details h2 { margin-top: 0; color: #6f42c1; font-size: 24px; text-transform: uppercase; }
+    .star-details p { line-height: 1.6; color: #ccc; font-size: 15px; margin: 8px 0; }
+    .star-poster { width: 200px; height: 285px; object-fit: cover; border-radius: 6px; border: 2px solid #6f42c1; background: #262626; }
+    #dynamicStars { width: 100%; display: flex; flex-direction: column; align-items: center; }
+  </style>
+</head>
+<body>
+  <div class="navbar"><a href="wiki_darstellerinnen.html" class="back-btn">← Zurück</a></div>
+  <div class="container">
+    <header><h1>INDEX: BUCHSTABE R</h1></header>
+    <div id="dynamicStars"></div>
+  </div>
+  <script>
+    function ladeDynamischeStars() {
+      const mainContainer = document.getElementById('dynamicStars');
+      const neueStars = JSON.parse(localStorage.getItem('wikiArtikelDarstellerinnen')) || [];
+      neueStars.forEach(star => {
+        if (star.index === "R") {
+          const card = document.createElement('div'); card.className = "star-card";
+          card.innerHTML = `<div class="star-details"><h2>${star.name.toUpperCase()}</h2><p><strong>Geburtsdatum / Alter:</strong> ${star.year || 'N/A'}</p><p><strong>Bekannteste Rollen:</strong> ${star.genre || 'N/A'}</p><p><strong>Biografie &amp; Karriere:</strong> ${star.plot || 'N/A'}</p><p><strong>Aktuelle Projekte &amp; Uncut-Szenen:</strong> ${star.uncut || 'N/A'}</p></div><img class="star-poster" src="${star.poster || 'Supergirl.jpg'}" alt="${star.name} Cover">`;
+          mainContainer.appendChild(card);
+        }
+      });
+    }
+    window.onload = ladeDynamischeStars;
+  </script>
+</body>
+</html>
