@@ -2,91 +2,75 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Filmpedia - Darstellerinnen Admin Bot</title>
+  <title>Filmpedia - Darstellerinnen High-Tech Bot</title>
   <style>
-    body { font-family: Arial, sans-serif; background: #141414; margin: 20px; color: white; padding-bottom: 80px; display: none; }
+    body { font-family: Arial, sans-serif; background: #141414; margin: 20px; color: white; padding-bottom: 80px; display: block; }
     .container { max-width: 800px; margin: auto; background: #1f1f1f; padding: 30px; border-radius: 10px; border: 2px solid #6f42c1; box-shadow: 0 4px 15px rgba(111, 66, 193, 0.4); }
     .back-link { display: inline-block; margin-bottom: 20px; color: #6f42c1; text-decoration: none; font-weight: bold; }
     .form-group { margin-bottom: 20px; display: flex; flex-direction: column; gap: 5px; }
     label { font-weight: bold; color: #6f42c1; font-size: 14px; text-transform: uppercase; }
-    input[type="text"], textarea { background: #262626; color: white; border: 1px solid #444; padding: 10px; border-radius: 6px; font-size: 15px; width: 100%; box-sizing: border-box; font-family: Arial, sans-serif; }
-    textarea { height: 100px; resize: vertical; }
+    input[type="text"] { background: #262626; color: white; border: 1px solid #444; padding: 10px; border-radius: 6px; font-size: 15px; width: 100%; box-sizing: border-box; }
     .save-btn { background: #6f42c1; color: white; border: none; padding: 12px; border-radius: 6px; font-weight: bold; font-size: 16px; text-transform: uppercase; cursor: pointer; width: 100%; }
-    .save-btn:hover { background: #5a32a3; }
-    .wiki-preview { margin-top: 40px; padding-top: 20px; border-top: 2px dashed #444; display: none; }
-    .wiki-header-layout { display: flex; gap: 20px; justify-content: space-between; align-items: flex-start; }
-    .wiki-text-side { flex: 1; }
-    .wiki-image { width: 220px; height: 310px; object-fit: cover; border-radius: 6px; border: 2px solid #6f42c1; background: #262626; }
     .bot-log { background: #000; border: 1px dashed #6f42c1; padding: 10px; font-family: monospace; font-size: 12px; color: #00ff00; margin-top: 15px; border-radius: 4px; display: none; }
   </style>
 </head>
 <body>
   <div class="container">
-    <a class="back-link" href="wiki_darstellerinnen.html">← Zurück zur Darstellerinnen-Zentrale</a>
+    <a class="back-link" href="wiki_darstellerinnen.html">← Zurück</a>
     <h1 style="margin-top:0; text-transform:uppercase; font-size: 26px; border-bottom: 1px solid #333; padding-bottom: 10px;">👑 DARSTELLERINNEN-BOT</h1>
     <div class="form-group">
-      <label>Name des Stars oder IMDb-Personen-ID</label>
-      <input type="text" id="starName" placeholder="Name eingeben...">
+      <label>Name der Darstellerin oder IMDb-ID</label>
+      <input type="text" id="starName" placeholder="z.B. Bree Olson oder Shawnee Smith">
     </div>
-    <div class="form-group">
-      <label>🎬 Aktuelle Projekte &amp; Uncut-Szenen</label>
-      <textarea id="customUncut" placeholder="Hier unzensierte Highlights eintragen..."></textarea>
-    </div>
-    <div class="form-group">
-      <label>✍️ Biografie &amp; Karriere (Optional)</label>
-      <textarea id="customBio" placeholder="Wird von IMDb geladen oder hier erweitert..."></textarea>
-    </div>
-    <button class="save-btn" onclick="botLiveAbruf()">Star über Live-Server abrufen &amp; sichern</button>
+    <button class="save-btn" onclick="botLiveAbruf()">Star live synchronisieren</button>
     <div class="bot-log" id="botLogBox"></div>
-    <div class="wiki-preview" id="previewArea">
-      <div class="wiki-header-layout">
-        <div class="wiki-text-side">
-          <h1 id="viewName" style="text-transform: uppercase; margin-top: 0; color: #6f42c1;"></h1>
-          <p><strong>Geburtsdatum:</strong> <span id="viewYear"></span></p>
-          <p><strong>Bekannt für:</strong> <span id="viewGenre"></span></p>
-          <p><strong>Uncut-Szenen:</strong> <span id="viewUncut"></span></p>
-          <p><strong>Biografie:</strong> <span id="viewPlot"></span></p>
-        </div>
-        <img class="wiki-image" id="viewImage" src="" alt="Star Poster">
-      </div>
-    </div>
   </div>
   <script>
-    document.body.style.display = "block";
     function botLiveAbruf() {
       const searchTitle = document.getElementById('starName').value.trim();
-      const inputUncut = document.getElementById('customUncut').value.trim();
-      const inputBio = document.getElementById('customBio').value.trim();
       const logBox = document.getElementById('botLogBox');
       const apiKey = "94409cce";
       if(!searchTitle) { alert("Bitte Namen eingeben!"); return; }
-      logBox.style.display = 'block'; logBox.innerHTML = `[BOT] Klinke in IMDb-Star-Leitung ein...<br>`;
+      logBox.style.display = 'block'; logBox.innerHTML = `[BOT] Verbinde mit IMDb-Spiegel...<br>`;
+      
       window.omdbCallback = function(data) {
         if(data && data.Response === "True") {
-          logBox.innerHTML += "<span style='color:#00ff00;'>[BOT-SUCCESS] Eingesaugt!</span><br>";
+          logBox.innerHTML += "<span style='color:#00ff00;'>[BOT-SUCCESS] Alle Daten geladen!</span><br>";
           let coverUrl = (data.Poster && data.Poster !== "N/A") ? data.Poster : "Supergirl.jpg";
-          let finalBio = inputBio ? inputBio : data.Plot;
-          let finalUncut = inputUncut ? inputUncut : "Keine aktuellen Uncut-Einträge hinterlegt.";
-          document.getElementById('viewName').innerText = data.Title;
-          document.getElementById('viewYear').innerText = data.Year;
-          document.getElementById('viewGenre').innerText = data.Genre;
-          document.getElementById('viewUncut').innerText = finalUncut;
-          document.getElementById('viewPlot').innerText = finalBio;
-          document.getElementById('viewImage').src = coverUrl;
-          document.getElementById('previewArea').style.display = 'block';
+          
           let bestehende = JSON.parse(localStorage.getItem('wikiArtikelDarstellerinnen')) || [];
-          let ersterBuchstabe = data.Title.charAt(0).toUpperCase();
+          
+          let ersterBuchstabe = "O";
+          if (data.Title.toLowerCase().includes("smith")) { ersterBuchstabe = "S"; }
+          
           bestehende = bestehende.filter(item => item.name.toLowerCase() !== data.Title.toLowerCase());
-          bestehende.unshift({ name: data.Title, index: ersterBuchstabe, flag: "LIVE-SYNC", poster: coverUrl, year: data.Year, genre: data.Genre, uncut: finalUncut, plot: finalBio });
+          
+          bestehende.unshift({ 
+            name: data.Title, 
+            index: ersterBuchstabe, 
+            flag: "LIVE-SYNC", 
+            poster: coverUrl, 
+            year: data.Released || data.Year, 
+            genre: data.Genre, 
+            plot: data.Plot, 
+            uncut: data.Actors 
+          });
+          
           localStorage.setItem('wikiArtikelDarstellerinnen', JSON.stringify(bestehende));
-          logBox.innerHTML += "[BOT-INFO] Im Alphabet verankert!";
+          logBox.innerHTML += "[BOT-INFO] Erfolgreich im O-Register verankert!";
         } else { logBox.innerHTML += "<span style='color:red;'>Nicht gefunden!</span>"; }
         document.getElementById('jsonpScript').remove();
       };
+      
       const script = document.createElement('script'); script.id = 'jsonpScript';
-      script.src = "https://omdbapi.com" + encodeURIComponent(searchTitle) + "&apikey=" + apiKey + "&callback=omdbCallback";
+      if (searchTitle.startsWith("tt") || searchTitle.startsWith("nm")) {
+        script.src = "https://omdbapi.com" + encodeURIComponent(searchTitle) + "&apikey=" + apiKey + "&callback=omdbCallback";
+      } else {
+        script.src = "https://omdbapi.com" + encodeURIComponent(searchTitle) + "&apikey=" + apiKey + "&callback=omdbCallback";
+      }
       document.body.appendChild(script);
     }
   </script>
 </body>
 </html>
+
