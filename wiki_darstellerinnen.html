@@ -2,73 +2,73 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Filmpedia - Darstellerinnen High-Tech Bot</title>
+  <title>Filmpedia Wiki - Darstellerinnen</title>
   <style>
-    body { font-family: Arial, sans-serif; background: #141414; margin: 20px; color: white; padding-bottom: 80px; display: none; }
-    .container { max-width: 800px; margin: auto; background: #1f1f1f; padding: 30px; border-radius: 10px; border: 2px solid #6f42c1; box-shadow: 0 4px 15px rgba(111, 66, 193, 0.4); }
-    .back-link { display: inline-block; margin-bottom: 20px; color: #6f42c1; text-decoration: none; font-weight: bold; }
-    .form-group { margin-bottom: 20px; display: flex; flex-direction: column; gap: 5px; }
-    label { font-weight: bold; color: #6f42c1; font-size: 14px; text-transform: uppercase; }
-    input[type="text"] { background: #262626; color: white; border: 1px solid #444; padding: 10px; border-radius: 6px; font-size: 15px; width: 100%; box-sizing: border-box; }
-    .save-btn { background: #6f42c1; color: white; border: none; padding: 12px; border-radius: 6px; font-weight: bold; font-size: 16px; text-transform: uppercase; cursor: pointer; width: 100%; }
-    .bot-log { background: #000; border: 1px dashed #6f42c1; padding: 10px; font-family: monospace; font-size: 12px; color: #00ff00; margin-top: 15px; border-radius: 4px; display: none; }
+    body { font-family: Arial, sans-serif; background: #141414; margin: 0; color: white; padding-bottom: 80px; }
+    .navbar { background: #000; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #6f42c1; box-sizing: border-box; width: 100%; }
+    .navbar .logo { font-size: 24px; color: #6f42c1; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
+    .back-btn { background: #222; color: white; border: 1px solid #444; padding: 6px 12px; border-radius: 5px; font-weight: bold; text-decoration: none; font-size: 13px; text-transform: uppercase; }
+    .back-btn:hover { background: #6f42c1; }
+    .container { max-width: 1000px; margin: auto; padding: 40px 20px; text-align: center; }
+    h1 { font-size: 36px; text-transform: uppercase; margin-bottom: 10px; color: #6f42c1; }
+    .subtitle { color: #aaa; font-size: 16px; margin-bottom: 40px; }
+    .abc-container { display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; max-width: 800px; margin: auto; margin-bottom: 50px; }
+    .abc-btn { display: inline-block; width: 50px; height: 50px; background: #1f1f1f; color: white; text-decoration: none; line-height: 50px; font-size: 20px; font-weight: bold; border-radius: 6px; border: 1px solid #333; transition: all 0.2s; }
+    .abc-btn:hover { background: #6f42c1; border-color: #6f42c1; transform: scale(1.1); }
+    .bot-link-box { background: #1f1f1f; border: 1px dashed #6f42c1; padding: 20px; border-radius: 8px; max-width: 500px; margin: auto; }
+    .bot-btn { display: inline-block; background: #6f42c1; color: white; text-decoration: none; padding: 10px 20px; border-radius: 4px; font-weight: bold; text-transform: uppercase; margin-top: 10px; }
+    .bot-btn:hover { background: #5a32a3; }
   </style>
 </head>
 <body>
-  <div class="container">
-    <a class="back-link" href="wiki_darstellerinnen.html">← Zurück</a>
-    <h1 style="margin-top:0; text-transform:uppercase; font-size: 26px; border-bottom: 1px solid #333; padding-bottom: 10px;">👑 DARSTELLERINNEN-BOT</h1>
-    <div class="form-group">
-      <label>Name der Darstellerin oder IMDb-ID</label>
-      <input type="text" id="starName" placeholder="z.B. Bree Olson oder Shawnee Smith">
-    </div>
-    <button class="save-btn" onclick="botLiveAbruf()">Star live synchronisieren</button>
-    <div class="bot-log" id="botLogBox"></div>
+
+  <div class="navbar">
+    <div class="logo">Darstellerinnen 💜</div>
+    <a href="filmpedia.html" class="back-btn">← Zur Startseite</a>
   </div>
-  <script>
-    document.body.style.display = "block";
-    function botLiveAbruf() {
-      const searchTitle = document.getElementById('starName').value.trim();
-      const logBox = document.getElementById('botLogBox');
-      const apiKey = "94409cce";
-      if(!searchTitle) { alert("Bitte Namen eingeben!"); return; }
-      logBox.style.display = 'block'; logBox.innerHTML = `[BOT] Verbinde mit IMDb-Spiegel...<br>`;
-      
-      window.omdbCallback = function(data) {
-        if(data && data.Response === "True") {
-          logBox.innerHTML += "<span style='color:#00ff00;'>[BOT-SUCCESS] Alle Daten geladen!</span><br>";
-          let coverUrl = (data.Poster && data.Poster !== "N/A") ? data.Poster : "Supergirl.jpg";
-          
-          let bestehende = JSON.parse(localStorage.getItem('wikiArtikelDarstellerinnen')) || [];
-          let ersterBuchstabe = data.Title.charAt(0).toUpperCase();
-          bestehende = bestehende.filter(item => item.name.toLowerCase() !== data.Title.toLowerCase());
-          
-          bestehende.unshift({ 
-            name: data.Title, 
-            index: ersterBuchstabe, 
-            flag: "LIVE-SYNC", 
-            poster: coverUrl, 
-            year: data.Released || data.Year, 
-            genre: data.Genre, 
-            plot: data.Plot, 
-            uncut: data.Actors 
-          });
-          
-          localStorage.setItem('wikiArtikelDarstellerinnen', JSON.stringify(bestehende));
-          logBox.innerHTML += "[BOT-INFO] Erfolgreich im Alphabet verankert!";
-        } else { logBox.innerHTML += "<span style='color:red;'>Nicht gefunden!</span>"; }
-        document.getElementById('jsonpScript').remove();
-      };
-      
-      const script = document.createElement('script'); script.id = 'jsonpScript';
-      if (searchTitle.startsWith("tt")) {
-        script.src = "https://omdbapi.com" + encodeURIComponent(searchTitle) + "&apikey=" + apiKey + "&callback=omdbCallback";
-      } else {
-        script.src = "https://omdbapi.com" + encodeURIComponent(searchTitle) + "&apikey=" + apiKey + "&callback=omdbCallback";
-      }
-      document.body.appendChild(script);
-    }
-  </script>
+
+  <div class="container">
+    <h1>Darstellerinnen-Zentrale</h1>
+    <div class="subtitle">Wähle einen Anfangsbuchstaben des bürgerlichen Nachnamens oder Künstlernamens</div>
+
+    <!-- ALLE KNÖPFE SIND FLIEGEND BEREIT -->
+    <div class="abc-container">
+      <a href="darstellerinnen_a.html" class="abc-btn">A</a>
+      <a href="darstellerinnen_b.html" class="abc-btn">B</a>
+      <a href="darstellerinnen_c.html" class="abc-btn">C</a>
+      <a href="darstellerinnen_d.html" class="abc-btn">D</a>
+      <a href="darstellerinnen_e.html" class="abc-btn">E</a>
+      <a href="darstellerinnen_f.html" class="abc-btn">F</a>
+      <a href="darstellerinnen_g.html" class="abc-btn">G</a>
+      <a href="darstellerinnen_h.html" class="abc-btn">H</a>
+      <a href="darstellerinnen_i.html" class="abc-btn">I</a>
+      <a href="darstellerinnen_j.html" class="abc-btn">J</a>
+      <a href="darstellerinnen_k.html" class="abc-btn">K</a>
+      <a href="darstellerinnen_l.html" class="abc-btn">L</a>
+      <a href="darstellerinnen_m.html" class="abc-btn">M</a>
+      <a href="darstellerinnen_n.html" class="abc-btn">N</a>
+      <a href="darstellerinnen_o.html" class="abc-btn">O</a>
+      <a href="darstellerinnen_p.html" class="abc-btn">P</a>
+      <a href="darstellerinnen_q.html" class="abc-btn">Q</a>
+      <a href="darstellerinnen_r.html" class="abc-btn">R</a>
+      <a href="darstellerinnen_s.html" class="abc-btn">S</a>
+      <a href="darstellerinnen_t.html" class="abc-btn">T</a>
+      <a href="darstellerinnen_u.html" class="abc-btn">U</a>
+      <a href="darstellerinnen_v.html" class="abc-btn">V</a>
+      <a href="darstellerinnen_w.html" class="abc-btn">W</a>
+      <a href="darstellerinnen_x.html" class="abc-btn">X</a>
+      <a href="darstellerinnen_y.html" class="abc-btn">Y</a>
+      <a href="darstellerinnen_z.html" class="abc-btn">Z</a>
+    </div>
+
+    <!-- ZUGANG ZUM LIVE BOT -->
+    <div class="bot-link-box">
+      <div style="font-weight: bold; color: #6f42c1; text-transform: uppercase; font-size: 14px; margin-bottom: 5px;">Schaltzentrale</div>
+      <p style="margin: 0; color: #aaa; font-size: 14px;">Neue Darstellerin live über IMDb-ID oder Namen synchronisieren.</p>
+      <a href="artikel_darstellerin.html" class="bot-btn">Star-Bot aufrufen →</a>
+    </div>
+  </div>
+
 </body>
 </html>
 
