@@ -67,11 +67,12 @@
       };
       
       const script = document.createElement('script'); script.id = 'jsonpScript';
-      if (searchTitle.startsWith("tt") || searchTitle.startsWith("nm")) {
+            if (searchTitle.startsWith("tt") || searchTitle.startsWith("nm")) {
         script.src = "https://omdbapi.com" + encodeURIComponent(searchTitle) + "&apikey=" + apiKey + "&callback=omdbCallback";
       } else {
         script.src = "https://omdbapi.com" + encodeURIComponent(searchTitle) + "&apikey=" + apiKey + "&callback=omdbCallback";
       }
+
       document.body.appendChild(script);
     }
   </script>
